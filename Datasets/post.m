@@ -16,7 +16,7 @@ LTCcost = 10;
 
 %filename = 'Sept17-18.csv';
 %filename = 'Sept17_2017.csv';
-filename = 'Sept19-21.csv';
+filename = 'Sept19-24.csv';
 M = csvread(filename);
 
 Cost = M(1:end, BTCcost);
@@ -36,12 +36,30 @@ filteredVol = filter(b,a,Vol);
 
 normSen = filteredSen .* (1 / max(filteredSen)); %Normalize
 normVol = filteredVol .* (1 / max(filteredVol)); %Normalize
+normCost = Cost .* (1 / max(Cost)); %Normalize
 
 x = 0:length(M) - 1;
 x2 = 0:length(M) - 1;
 
+len = length(Sen) - 100; %Want to analyse half the dataset
+
+for i = 1:len
+	Cost(1) = [];
+	Sen(end) = [];
+	meanResult(i) = mean(Cost .*Sen);
+end
+
+ax = plotyy(x, Cost, x2, filteredSen);
+title(titleRaw, 'FontSize', FontS);
+ylabel(ax(1), 'Cost (USD)', 'FontSize', FontS);
+ylabel(ax(2), 'Crypto Sentiment', 'FontSize', FontS);
+legend('Cost', 'Sentiment', 'Sentiment Volume')
+
+break;
+
+
 %Time shift
-%x2 = x2 + 300;
+x2 = x2 + 800;
 
 ax = plotyy(x, filteredCost, x2, [normSen normVol]);
 title(titleRaw, 'FontSize', FontS);
@@ -49,8 +67,8 @@ ylabel(ax(1), 'Cost (USD)', 'FontSize', FontS);
 ylabel(ax(2), 'Crypto Sentiment', 'FontSize', FontS);
 legend('Cost', 'Sentiment(Normalised)', 'Sentiment Volume(Normalised)')
 
-figure();
 
+figure();
 dsdt = diff(filteredSen) ./ 10;
 x2(end) = [];
 ax2 = plotyy(x, Cost, x2, dsdt);
@@ -58,6 +76,6 @@ title(titleDer, 'FontSize', FontS);
 ylabel(ax2(1), 'Cost (USD)', 'FontSize', FontS);
 ylabel(ax2(2), 'Crypto Sentiment', 'FontSize', FontS);
 
-figure();
-plotyy(x, Cost, x, normVol-normSen)
+%figure();
+%plotyy(x, Cost, x, normVol-normSen)
 
