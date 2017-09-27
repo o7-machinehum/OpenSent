@@ -35,9 +35,6 @@ Vol = M(1:end, BTCvol);
 titleRaw = 'Cost of Bitcoin vs. Bitcoin Sentiment';
 titleDer = 'Cost of Bitcoin vs. (d/dt)Bitcoin Sentiment';
 
-x = 0:length(M) - 1;
-x2 = 0:length(M) - 1;
-
 %Filtering
 %-------------------------------------------------------------
 windowSize = 50; 
@@ -54,41 +51,23 @@ Cost(1:windowSize) = [];
 filteredSen(1:windowSize) = [];
 filteredCost(1:windowSize) = [];
 filteredVol(1:windowSize) = [];
-x(1:windowSize) = [];
-x2(1:windowSize) = [];
+%x(1:windowSize) = [];
+%x2(1:windowSize) = [];
 
 %Normalise
 %-------------------------------------------------------------
-normSen = filteredSen .* (1 / max(filteredSen)); %Normalize
-normVol = filteredVol .* (1 / max(filteredVol)); %Normalize
-normCost = Cost .* (1 / max(Cost)); %Normalize
-
-%Initial Plotting (Raw)
-%-------------------------------------------------------------
-figure(1)
-ax = plotyy(x, filteredCost, x2, filteredSen);
-title(titleRaw, 'FontSize', FontS);
-ylabel(ax(1), 'Cost (USD)', 'FontSize', FontS);
-ylabel(ax(2), 'Crypto Sentiment', 'FontSize', FontS);
-legend('Cost', 'Sentiment')
-
-figure(2)
-x3 = x;
-x3(end) = [];
-ax = plotyy(x3, diff(filteredCost), x3, diff(filteredSen));
-title(titleRaw, 'FontSize', FontS);
-ylabel(ax(1), 'Cost (USD)', 'FontSize', FontS);
-ylabel(ax(2), 'Crypto Sentiment', 'FontSize', FontS);
-legend('Cost', 'Sentiment')
-
-%break;
+normSen = filteredSen - min(filteredSen); %Normalize
+normSen = normSen.*(1/max(normSen));
+normCost = filteredCost - min(filteredCost); %Normalize
+normCost = normCost.*(1/max(normCost));
 
 %Find time lag
 %-------------------------------------------------------------
-len = length(Sen) - 1000 ; %Want to analyse quarter the dataset
+len = length(Sen) / 2; %How much into the future we look is a matter of discussion
 
-TempCost = Cost;
-TempSen = filteredSen;
+%Temp values
+TempCost = normCost;
+TempSen = normSen;
 
 for i = 1:len
 	TempCost(1) = [];
@@ -96,10 +75,10 @@ for i = 1:len
 	meanResult(i) = mean(TempCost - TempSen);
 end
 
-figure(3)
+figure(1)
 plot(meanResult);
 
-title('Mean result time shifted correlation of Cost & Sentiment', 'FontSize', FontS);
+title('Mean result time shifted correlation of Cost(Normalised) & Sentiment(Normalised)', 'FontSize', FontS);
 xlabel('Time shift', 'FontSize', FontS);
 ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 
@@ -107,8 +86,8 @@ ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 %-------------------------------------------------------------
 lenDer = length(Sen) / 4 ; %Want to analyse quarter the dataset
 
-TempCost = diff(filteredCost);
-TempSen = diff(filteredSen);
+TempCost = diff(normCost);
+TempSen = diff(normSen);
 
 for i = 1:len
 	TempCost(1) = [];
@@ -116,41 +95,23 @@ for i = 1:len
 	meanResultdiff(i) = mean(abs(TempCost - TempSen));
 end
 
-figure(4)
+figure(2)
 plot(meanResultdiff);
-title('Mean result time shifted correlation of dCost/dt and dSen/dt', 'FontSize', FontS);
+title('Mean result time shifted correlation of dCost/dt(norm) and dSen/dt(norm)', 'FontSize', FontS);
 xlabel('Time shift', 'FontSize', FontS);
 ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 
+break; %Break here - look at both plots then decide what lag to use
 
 %Apply Lag
 %-------------------------------------------------------------
+x = 0:length(Cost) - 1;
+x2 = 0:length(Cost) - 1;
+
 lag = find(meanResult == min(meanResult));
+%lag = find(meanResult == min(meanResultdiff));
 x2 = x2 + lag;
 
-break;
-
-figure(4)
-ax2 = plotyy(x, filteredCost, x2, filteredSen);
+figure(1)
+ax2 = plotyy(x, normCost, x2, normSen);
 legend('Cost', 'Sentiment (timeshifted)')
-
-break;
-
-figure(5)
-ax = plotyy(x, filteredCost, x2, [normSen normVol]);
-title(titleRaw, 'FontSize', FontS);
-ylabel(ax(1), 'Cost (USD)', 'FontSize', FontS);
-ylabel(ax(2), 'Crypto Sentiment', 'FontSize', FontS);
-legend('Cost', 'Sentiment(Normalised)', 'Sentiment Volume(Normalised)')
-
-figure(6);
-dsdt = diff(filteredSen) ./ 10;
-x2(end) = [];
-ax2 = plotyy(x, filteredCost, x2, dsdt);
-title(titleDer, 'FontSize', FontS);
-ylabel(ax2(1), 'Cost (USD)', 'FontSize', FontS);
-ylabel(ax2(2), 'Crypto Sentiment', 'FontSize', FontS);
-
-%figure();
-%plotyy(x, Cost, x, normVol-normSen)
-break;
