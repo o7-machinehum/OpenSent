@@ -1,3 +1,5 @@
+#!/usr/bin/octave-cli --persist
+
 %Todo
 %-------------------------------------------------------------
 % 1. Implement Filename into plot titles
@@ -6,11 +8,18 @@ pkg load signal;
 
 clc; clear;
 
+%Parameters
+%-------------------------------------------------------------
 FontS = 20;
+ShiftMethod = 'diff'; %Differential shift method
+%ShiftMethod = 'mag'; %Magnitude shift method
+%ShiftMethod = 'man'; %Manual shift method
+
+
 
 %File location
 %-------------------------------------------------------------
-filename = 'Sept/Sept19-26.csv';
+filename = 'Oct/Sept29-Oct1.csv';
 M = csvread(filename);
 
 %Defining placements
@@ -101,17 +110,32 @@ title('Mean result time shifted correlation of dCost/dt(norm) and dSen/dt(norm)'
 xlabel('Time shift', 'FontSize', FontS);
 ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 
-break; %Break here - look at both plots then decide what lag to use
+%break; %Break here - look at both plots then decide what lag to use
 
 %Apply Lag
 %-------------------------------------------------------------
 x = 0:length(Cost) - 1;
 x2 = 0:length(Cost) - 1;
 
-lag = find(meanResult == min(meanResult));
-%lag = find(meanResult == min(meanResultdiff));
+if strcmp(ShiftMethod, 'man')
+	lag = 400; %Manual lag
+	tit = strcat('Manual lag of:', num2str(lag*30/3600), 'hrs');
+elseif strcmp(ShiftMethod, 'mag')
+	lag = find(meanResult == min(meanResult));
+	tit = strcat('Magnutude numarical method used lag of:', num2str(lag*30/3600), 'hrs');
+else
+	lag = find(meanResultdiff == min(meanResultdiff));
+	tit = strcat('Numarical derivative method used lag of:', num2str(lag*30/3600), 'hrs');
+end
+
+tit = strcat(tit, filename);
+
 x2 = x2 + lag;
 
 figure(1)
-ax2 = plotyy(x, normCost, x2, normSen);
-legend('Cost', 'Sentiment (timeshifted)')
+ax2 = plotyy(x, filteredCost, x2, filteredSen);
+legend('Cost', 'Sentiment (timeshifted)');
+title(tit, 'FontSize', FontS);
+xlabel('Time', 'FontSize', FontS);
+ylabel(ax2(1), 'Cost (USD)', 'FontSize', FontS);
+ylabel(ax2(2), 'Crypto Sentiment', 'FontSize', FontS);

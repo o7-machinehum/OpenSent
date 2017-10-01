@@ -1,3 +1,6 @@
+
+:wq
+
 Need to run
 buildPrice.py - This recives Crypto prices
 ./run.sh - This runs the actual program

@@ -1,3 +1,5 @@
+#!/usr/bin/octave-cli --persist
+
 %Todo
 %-------------------------------------------------------------
 % 1. Implement Filename into plot titles
@@ -10,7 +12,7 @@ FontS = 20;
 
 %File location
 %-------------------------------------------------------------
-filename = 'Sept/Sept19-26.csv';
+filename = 'Oct/Sept29-Oct1.csv';
 M = csvread(filename);
 
 %Defining placements
@@ -72,6 +74,8 @@ ylabel(ax(1), 'Cost (USD)', 'FontSize', FontS);
 ylabel(ax(2), 'Crypto Sentiment', 'FontSize', FontS);
 legend('Cost', 'Sentiment')
 
+%Initial Plotting (Diff)
+%-------------------------------------------------------------
 figure(2)
 x3 = x;
 x3(end) = [];
