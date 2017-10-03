@@ -15,11 +15,17 @@ ShiftMethod = 'diff'; %Differential shift method
 %ShiftMethod = 'mag'; %Magnitude shift method
 %ShiftMethod = 'man'; %Manual shift method
 
-
-
 %File location
 %-------------------------------------------------------------
+%filename = 'Sept/Sept17-18.csv';
+%filename = 'Sept/Sept17_2017.csv';
+%filename = 'Sept/Sept19-21.csv';
+%filename = 'Sept/Sept19-26.csv';
+%filename = 'Sept/Sept20_2017.csv';
+%filename = 'Sept/Sept17_2017.csv';
+
 filename = 'Oct/Sept29-Oct1.csv';
+
 M = csvread(filename);
 
 %Defining placements
@@ -34,9 +40,14 @@ LTCvol = 8;
 LTCsen = 9;
 LTCcost = 10;
 
-Cost = M(1:end, BTCcost);
-Sen = M(1:end, BTCsen);
-Vol = M(1:end, BTCvol);
+ETHticker = 11;
+ETHvol = 12;
+ETHsen = 13;
+ETHcost = 14;
+
+Cost = M(1:end, ETHcost);
+Sen = M(1:end, ETHsen);
+Vol = M(1:end, ETHvol);
 
 %Cost = M(1:end, LTCcost);
 %Sen = M(1:end, LTCsen);
@@ -110,7 +121,7 @@ title('Mean result time shifted correlation of dCost/dt(norm) and dSen/dt(norm)'
 xlabel('Time shift', 'FontSize', FontS);
 ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 
-%break; %Break here - look at both plots then decide what lag to use
+break; %Break here - look at both plots then decide what lag to use
 
 %Apply Lag
 %-------------------------------------------------------------
@@ -135,6 +146,19 @@ x2 = x2 + lag;
 figure(1)
 ax2 = plotyy(x, filteredCost, x2, filteredSen);
 legend('Cost', 'Sentiment (timeshifted)');
+title(tit, 'FontSize', FontS);
+xlabel('Time', 'FontSize', FontS);
+ylabel(ax2(1), 'Cost (USD)', 'FontSize', FontS);
+ylabel(ax2(2), 'Crypto Sentiment', 'FontSize', FontS);
+
+%Taking derive remove element
+x(end) = [];
+x2(end) = [];
+
+tit = strcat('diff',tit);
+figure(2)
+ax2 = plotyy(x, diff(filteredCost), x2, diff(filteredSen));
+legend('dCost/dt', 'dSentiment/dt (timeshifted)');
 title(tit, 'FontSize', FontS);
 xlabel('Time', 'FontSize', FontS);
 ylabel(ax2(1), 'Cost (USD)', 'FontSize', FontS);

@@ -12,7 +12,15 @@ FontS = 20;
 
 %File location
 %-------------------------------------------------------------
+%filename = 'Sept/Sept17-18.csv';
+%filename = 'Sept/Sept17_2017.csv';
+%filename = 'Sept/Sept19-21.csv';
+%filename = 'Sept/Sept19-26.csv';
+%filename = 'Sept/Sept20_2017.csv';
+%filename = 'Sept/Sept17_2017.csv';
+
 filename = 'Oct/Sept29-Oct1.csv';
+
 M = csvread(filename);
 
 %Defining placements
@@ -27,9 +35,14 @@ LTCvol = 8;
 LTCsen = 9;
 LTCcost = 10;
 
-Cost = M(1:end, BTCcost);
-Sen = M(1:end, BTCsen);
-Vol = M(1:end, BTCvol);
+ETHticker = 11;
+ETHvol = 12;
+ETHsen = 13;
+ETHcost = 14;
+
+Cost = M(1:end, LTCcost);
+Sen = M(1:end, LTCsen);
+Vol = M(1:end, LTCvol);
 
 %Cost = M(1:end, LTCcost);
 %Sen = M(1:end, LTCsen);
