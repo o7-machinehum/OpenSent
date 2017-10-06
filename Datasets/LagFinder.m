@@ -15,11 +15,9 @@ ShiftMethod = 'diff'; %Differential shift method
 %ShiftMethod = 'mag'; %Magnitude shift method
 %ShiftMethod = 'man'; %Manual shift method
 
-
-
 %File location
 %-------------------------------------------------------------
-filename = 'Oct/Sept29-Oct1.csv';
+filename = 'Oct/Oct2.csv';
 M = csvread(filename);
 
 %Defining placements
@@ -110,7 +108,7 @@ title('Mean result time shifted correlation of dCost/dt(norm) and dSen/dt(norm)'
 xlabel('Time shift', 'FontSize', FontS);
 ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 
-%break; %Break here - look at both plots then decide what lag to use
+break; %Break here - look at both plots then decide what lag to use
 
 %Apply Lag
 %-------------------------------------------------------------
