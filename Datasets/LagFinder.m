@@ -15,6 +15,12 @@ ShiftMethod = 'diff'; %Differential shift method
 %ShiftMethod = 'mag'; %Magnitude shift method
 %ShiftMethod = 'man'; %Manual shift method
 
+MaxShifthr = 5;
+MaxShiftel = MaxShifthr*60*2;
+
+MinShifthr = 1; %Lets ignore a possible time lag less than 1hr
+MinShiftel = MinShifthr*60*2;
+
 %File location
 %-------------------------------------------------------------
 %filename = 'Sept/Sept17-18.csv';
@@ -24,7 +30,10 @@ ShiftMethod = 'diff'; %Differential shift method
 %filename = 'Sept/Sept20_2017.csv';
 %filename = 'Sept/Sept17_2017.csv';
 
-filename = 'Oct/Sept29-Oct1.csv';
+%filename = 'Oct/Sept29-Oct1.csv';
+%filename = 'Oct/Oct2.csv';
+%filename = 'Oct/Oct3.csv';
+filename = 'Oct/Oct4.csv';
 
 M = csvread(filename);
 
@@ -45,9 +54,9 @@ ETHvol = 12;
 ETHsen = 13;
 ETHcost = 14;
 
-Cost = M(1:end, ETHcost);
-Sen = M(1:end, ETHsen);
-Vol = M(1:end, ETHvol);
+Cost = M(1:end, BTCcost);
+Sen = M(1:end, BTCsen);
+Vol = M(1:end, BTCvol);
 
 %Cost = M(1:end, LTCcost);
 %Sen = M(1:end, LTCsen);
@@ -83,7 +92,7 @@ normCost = normCost.*(1/max(normCost));
 
 %Find time lag
 %-------------------------------------------------------------
-len = length(Sen) / 2; %How much into the future we look is a matter of discussion
+len = MaxShiftel;
 
 %Temp values
 TempCost = normCost;
@@ -104,12 +113,13 @@ ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 
 %Find time lag ds/dt
 %-------------------------------------------------------------
-lenDer = length(Sen) / 4 ; %Want to analyse quarter the dataset
+lenDer = MaxShiftel; %Max 5hr delay
+
 
 TempCost = diff(normCost);
 TempSen = diff(normSen);
 
-for i = 1:len
+for i = 1:lenDer
 	TempCost(1) = [];
 	TempSen(end) = [];
 	meanResultdiff(i) = mean(abs(TempCost - TempSen));
@@ -121,7 +131,7 @@ title('Mean result time shifted correlation of dCost/dt(norm) and dSen/dt(norm)'
 xlabel('Time shift', 'FontSize', FontS);
 ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 
-break; %Break here - look at both plots then decide what lag to use
+%break; %Break here - look at both plots then decide what lag to use
 
 %Apply Lag
 %-------------------------------------------------------------
@@ -132,10 +142,10 @@ if strcmp(ShiftMethod, 'man')
 	lag = 400; %Manual lag
 	tit = strcat('Manual lag of:', num2str(lag*30/3600), 'hrs');
 elseif strcmp(ShiftMethod, 'mag')
-	lag = find(meanResult == min(meanResult));
+	lag = find(meanResult == min(meanResult(MinShiftel:end)));
 	tit = strcat('Magnutude numarical method used lag of:', num2str(lag*30/3600), 'hrs');
 else
-	lag = find(meanResultdiff == min(meanResultdiff));
+	lag = find(meanResultdiff == min(meanResultdiff(MinShiftel:end)));
 	tit = strcat('Numarical derivative method used lag of:', num2str(lag*30/3600), 'hrs');
 end
 
