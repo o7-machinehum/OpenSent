@@ -14,6 +14,7 @@ FontS = 20;
 ShiftMethod = 'diff'; %Differential shift method
 %ShiftMethod = 'mag'; %Magnitude shift method
 %ShiftMethod = 'man'; %Manual shift method
+grid on
 
 MaxShifthr = 5;
 MaxShiftel = MaxShifthr*60*2;
@@ -33,7 +34,10 @@ MinShiftel = MinShifthr*60*2;
 %filename = 'Oct/Sept29-Oct1.csv';
 %filename = 'Oct/Oct2.csv';
 %filename = 'Oct/Oct3.csv';
-filename = 'Oct/Oct4.csv';
+%filename = 'Oct/Oct4.csv';
+%filename = 'Oct/Oct5.csv';
+filename = 'Oct/Oct6.csv';
+%filename = 'Oct/Oct7.csv';
 
 M = csvread(filename);
 
@@ -106,6 +110,7 @@ end
 
 figure(1)
 plot(meanResult);
+grid on
 
 title('Mean result time shifted correlation of Cost(Normalised) & Sentiment(Normalised)', 'FontSize', FontS);
 xlabel('Time shift', 'FontSize', FontS);
@@ -127,6 +132,7 @@ end
 
 figure(2)
 plot(meanResultdiff);
+grid on
 title('Mean result time shifted correlation of dCost/dt(norm) and dSen/dt(norm)', 'FontSize', FontS);
 xlabel('Time shift', 'FontSize', FontS);
 ylabel('Mean value (Lower is better)', 'FontSize', FontS);
@@ -154,7 +160,8 @@ tit = strcat(tit, filename);
 x2 = x2 + lag;
 
 figure(1)
-ax2 = plotyy(x, filteredCost, x2, filteredSen);
+ax2 = plotyy(x, filteredCost - mean(filteredCost), x2, filteredSen - mean(filteredSen));
+grid on
 legend('Cost', 'Sentiment (timeshifted)');
 title(tit, 'FontSize', FontS);
 xlabel('Time', 'FontSize', FontS);
@@ -168,6 +175,7 @@ x2(end) = [];
 tit = strcat('diff',tit);
 figure(2)
 ax2 = plotyy(x, diff(filteredCost), x2, diff(filteredSen));
+grid on
 legend('dCost/dt', 'dSentiment/dt (timeshifted)');
 title(tit, 'FontSize', FontS);
 xlabel('Time', 'FontSize', FontS);
