@@ -15,13 +15,13 @@ class Market(object):
         self.settings_file = settings
 
         if(self.settings_file == None):
-            self.CC_balance = [0 for i in range(4)] # total of 4 CC
+            self.CC_balance = [0 for i in range(3)] # total of 4 CC
             self.trans_per_day = 0
-            self.time_current = 0 # this will be set to the time idx of the first entry in the data
 
-        self.date = self.data.get_start_time() # we start at the beginning of dataset
+        self.time_current = self.data.get_start_time() # we start at the beginning of dataset
 
-    def get_CAD(self):
+
+    def get_USD(self):
 
         return self.balance
 
@@ -29,29 +29,36 @@ class Market(object):
 
         return self.CC_balance[idx]
 
-    def deposit_CAD(self, value):
-
+    def deposit_USD(self, value):
 
         if(value > 0):
-            self.balance += value
+            self.balance = self.balance + value
 
         return 1
 
     def deposit_CC(self, idx, value):
 
         if(value > 0):
-            self.CC_balance[idx] += value
+            self.CC_balance[idx] = self.CC_balance[idx] + value
 
         return 1
 
     def get_CC_value(self, idx):
-
-
-        return 1
+        if idx == 0:
+            return self.data.get_closest(self.time_current)['btc_val']
+        elif idx == 1:
+            return self.data.get_closest(self.time_current)['ltc_val']
+        else:
+            return self.data.get_closest(self.time_current)['eth_val']
 
     def get_sentiment(self, idx):
 
-        return 1
+        if idx == 0:
+            return self.data.get_closest(self.time_current)['btc_sent'].astype(float)
+        elif idx == 1:
+            return self.data.get_closest(self.time_current)['ltc_sent']
+        else:
+            return self.data.get_closest(self.time_current)['eth_sent']
 
     def get_time(self):
 
@@ -61,20 +68,38 @@ class Market(object):
 
         return self.trans_per_day
 
+    # assumes dt is in seconds
     def inc_time(self, dt):
 
         if(dt > 0):
-            self.time_current += dt
+            self.time_current = self.time_current + datetime.timedelta(0, dt)
 
         return 1
 
-    def sell_CC(self, amount):
+    def sell_CC(self, idx, cc_amount):
 
-
+        if cc_amount > self.CC_balance[idx]: # Not enough CC to sell
+            return 0
+        
+        
+        sale_value = self.get_CC_value(idx) * cc_amount # value in USD 
+        
+        self.CC_balance[idx] = self.CC_balance - cc_amount # remove sold CC from balance
+        
+        self.balance = self.balance + sale_value # add sale value to USD balance
         return 1
 
-    def buy_CC(self, amount):
-
+    def buy_CC(self, idx, usd_amount):
+        
+        if usd_amount > self.balance: # not enough USD to make purchase
+            return 0
+        
+        value = self.get_CC_value(idx)
+        purchase_amount = usd_amount / value
+        
+        self.balance = self.balance - usd_amount # remove money spent
+        self.CC_balance[idx] = self.CC_balance[idx] + purchase_amount # add purchased CC
+        
         return 1
 
 
@@ -95,11 +120,11 @@ class Data(object):
         for f in self.files:
             df = pd.read_csv(f, header=None, usecols=[0, 1, 3, 4, 5, 7, 8, 9, 11, 12, 13])
             df.columns = labels
-            df.set_index(['date', 'time'], drop=True)
 
             df['datetime'] = df['date'] + ' ' + df['time']
             df.drop('time', axis=1, inplace=True)
             df.drop('date', axis=1, inplace=True)
+
             df['datetime'] = pd.to_datetime(df['datetime'], format='%m/%d/%Y  %H/%M/%S')
 
             df = df.set_index(df['datetime'])
@@ -107,39 +132,31 @@ class Data(object):
 
             dfs.append(df)
 
-        self.frame = pd.concat(dfs, ignore_index=True)
-
+        self.frame = pd.concat(dfs)
         self.frame = self.frame.sort_index()
 
+    def get_closest(self, time):
 
+        if time < self.get_start_time():
+            return 0
 
-    # Gets the value of CAD at a given time (using closest point in data file)
-    def get_CAD(self, time):
+        # assumes entries are at max 50 seconds apart and are ordered chronologically
+        df1 = time - datetime.timedelta(0, 50)
 
+        if df1 < self.get_start_time():
+            df1 = self.get_start_time()
 
-        return 1
+        df2 = time + datetime.timedelta(0, 50)
 
-    # Gets the value of a given CC at a given time (using closest point in data file)
-    def get_CC(self, idx, time):
+        result = self.frame[df1:df2]
 
-        return 1
-
-    # Gets the value of the sentiment for a given CC (using closest point in data file)
-    def get_sentiment(self, idx, time):
-
-        return 1
-
-    def get_closest(df, time):
-
-        # assumes entries are 30 seconds apart and are ordered chronologically
-        df1 = time - datetime.timedelta(0, 30)
-        df2 = time + datetime.timedelta(0, 30)
-        result = df[df1:df2]
-
-        if abs(result.index[0] - time) < abs(result.index[1] - time):
+        if len(result) == 1:
             return result.loc[result.index[0]]
         else:
-            return result.loc[result.index[1]]
+            if abs(result.index[0] - time) < abs(result.index[1] - time):
+                return result.loc[result.index[0]]
+            else:
+                return result.loc[result.index[1]]
 
     # returns the starting time index of tha dataset
     def get_start_time(self):
