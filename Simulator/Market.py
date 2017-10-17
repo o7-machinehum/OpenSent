@@ -150,6 +150,19 @@ class Data(object):
 
         result = self.frame[df1:df2]
 
+        if len(result) == 0: # 50 s span isn't wide enough (discontinuity)
+            df1 = time - datetime.timedelta(0, 15*60*60)
+
+            if df1 < self.get_start_time():
+                df1 = self.get_start_time()
+
+            df2 = time + datetime.timedelta(0, 15*60*60)
+
+            result = self.frame[df1:df2]
+
+            if len(result) == 0: # I give up
+                return 0
+
         if len(result) == 1:
             return result.loc[result.index[0]]
         else:
