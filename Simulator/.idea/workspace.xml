@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3fc2027c-110d-4f6e-9a0e-f12be2fa29e2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Market.py" afterPath="$PROJECT_DIR$/Market.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test.py" afterPath="$PROJECT_DIR$/Test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,10 +13,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="Market.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Market.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Market.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1569">
+            <state relative-caret-position="5104">
               <caret line="176" column="0" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
@@ -27,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="667">
-              <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+            <state relative-caret-position="551">
+              <caret line="19" column="16" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="16" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -164,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508219725914</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed issue with time discontinuities. It seems that data isn't very regularly collected">
+      <created>1508221092336</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1508221092336</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -221,7 +226,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Made a whole lot of fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made a whole lot of fixes" />
+    <MESSAGE value="Fixed issue with time discontinuities. It seems that data isn't very regularly collected" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue with time discontinuities. It seems that data isn't very regularly collected" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -282,22 +288,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test.py">
+    <entry file="file://$PROJECT_DIR$/Market.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        <state relative-caret-position="5104">
+          <caret line="176" column="0" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#1#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Market.py">
+    <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1569">
-          <caret line="176" column="0" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+        <state relative-caret-position="551">
+          <caret line="19" column="16" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="16" />
           <folding>
-            <element signature="e#1#19#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
