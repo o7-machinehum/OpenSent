@@ -12,13 +12,13 @@ ShiftMethod = 'diff'; %Differential shift method
 %ShiftMethod = 'man'; %Manual shift method
 grid on
 
-MaxShifthr = 5;
+MaxShifthr = 6;
 MaxShiftel = MaxShifthr*60*2;
 
 MinShifthr = 1; %Lets ignore a possible time lag less than 1hr
 MinShiftel = MinShifthr*60*2;
 
-D = 20; %How many chunks do you want to break up the data into
+D = 16; %How many chunks do you want to break up the data into
 
 %File location
 %-------------------------------------------------------------
@@ -36,13 +36,25 @@ filename9 = 'Oct/Oct4.csv';
 filename10 = 'Oct/Oct5.csv';
 filename11 = 'Oct/Oct6.csv';
 filename12 = 'Oct/Oct7.csv';
+filename13 = 'Oct/Oct8.csv';
+filename14 = 'Oct/Oct9.csv';
+filename15 = 'Oct/Oct10.csv';
+filename16 = 'Oct/Oct11.csv';
+filename17 = 'Oct/Oct12.csv';
+filename18 = 'Oct/Oct13.csv';
 
 M = csvread(filename7);
 M = [M;csvread(filename8)];
 M = [M;csvread(filename9)];
 M = [M;csvread(filename10)];
 M = [M;csvread(filename11)];
-%M = [M;csvread(filename12)];
+M = [M;csvread(filename12)];
+M = [M;csvread(filename13)];
+M = [M;csvread(filename14)];
+M = [M;csvread(filename15)];
+M = [M;csvread(filename16)];
+M = [M;csvread(filename17)];
+M = [M;csvread(filename18)];
 
 %Defining placements
 %-------------------------------------------------------------
