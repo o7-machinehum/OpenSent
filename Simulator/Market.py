@@ -73,6 +73,11 @@ class Market(object):
     # assumes dt is in seconds
     def inc_time(self, dt):
 
+
+        multiple = round(dt / 30)
+
+        dt = multiple * 30
+
         if(dt > 0):
             self.time_current = self.time_current + datetime.timedelta(0, dt)
 
@@ -160,44 +165,12 @@ class Data(object):
         self.frame = pd.concat(dfs)
         self.frame = self.frame.sort_index()
 
+        self.frame[['btc_val', 'ltc_val', 'eth_val']] = self.frame[['btc_val', 'ltc_val', 'eth_val']].apply(pd.to_numeric, errors='coerce')
         # resample so that everything is 30s apart
         self.frame = self.frame.resample('30S').mean().interpolate(method='nearest')
 
     def get_closest(self, time):
-
-        if time < self.get_start_time():
-            return 0
-
-        # assumes entries are at max 50 seconds apart and are ordered chronologically
-        df1 = time - datetime.timedelta(0, 50)
-
-        if df1 < self.get_start_time():
-            df1 = self.get_start_time()
-
-        df2 = time + datetime.timedelta(0, 50)
-
-        result = self.frame[df1:df2]
-
-        if len(result) == 0: # 50 s span isn't wide enough (discontinuity)
-            df1 = time - datetime.timedelta(0, 15*60*60)
-
-            if df1 < self.get_start_time():
-                df1 = self.get_start_time()
-
-            df2 = time + datetime.timedelta(0, 15*60*60)
-
-            result = self.frame[df1:df2]
-
-            if len(result) == 0: # I give up
-                return 0
-
-        if len(result) == 1:
-            return result.loc[result.index[0]]
-        else:
-            if abs(result.index[0] - time) < abs(result.index[1] - time):
-                return result.loc[result.index[0]]
-            else:
-                return result.loc[result.index[1]]
+         return self.frame.loc[time]
 
     # returns the starting time index of tha dataset
     def get_start_time(self):

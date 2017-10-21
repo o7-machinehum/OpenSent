@@ -29,5 +29,6 @@ sim.sell_CC(0, sim.get_CC(0)) # SELL EVERYTHING
 print("USD: ", sim.get_USD())
 print("BTC: ", sim.get_CC(0))
 
-sim.plot_trading_stats(0)
+#sim.plot_trading_stats(0)
+sim.data.frame['btc_val'].plot()
 
