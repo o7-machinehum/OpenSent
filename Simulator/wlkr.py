@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from Market import Market
 
 from random import randint
