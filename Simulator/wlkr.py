@@ -1,31 +1,15 @@
 #!/usr/bin/python3
+#wlkr's bot
 
 from Market import Market
-
 from random import randint
 
-
-file = "/home/divgill/Documents/Crypto/cryptos/Datasets/Oct"
-
+file = "../Datasets/Oct"
 sim = Market(file, 1000)
+#sim.deposit_USD(1000); #Lets start with 1k
 
 for i in range(0, 10):
-    print("time ", sim.get_time())
-    print("USD: ", sim.get_USD())
-    print("BTC: ", sim.get_CC(0))
-    print("BTV val: ", sim.get_CC_value(0))
-
-    rand = randint(0, 100)
-
-    if rand < 25:
-        print("Buy!!!!!!!!!!")
-        sim.buy_CC(0, rand)
-
-    sim.inc_time(10*60*60)
-    print("****")
-
-print("Final Sale")
-sim.sell_CC(0, sim.get_CC(0)) # SELL EVERYTHING
-print("USD: ", sim.get_USD())
-print("BTC: ", sim.get_CC(0))
-
+	print("time ", sim.get_time())
+	print("USD: ", sim.get_USD())
+	print("BTC: ", sim.get_CC(0))
+	print("BTV val: ", sim.get_CC_value(0))
