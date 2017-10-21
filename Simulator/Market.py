@@ -73,15 +73,19 @@ class Market(object):
     # assumes dt is in seconds
     def inc_time(self, dt):
 
+        if dt > 0:
+            multiple = round(dt / 30)
+            dt = multiple * 30
+            time_current = self.time_current + datetime.timedelta(0, dt)
 
-        multiple = round(dt / 30)
+            if time_current >= self.data.get_start_time():
+                self.time_current = time_current
+                return 1
+            else:
+                return 0
+        else:
+            return 0
 
-        dt = multiple * 30
-
-        if(dt > 0):
-            self.time_current = self.time_current + datetime.timedelta(0, dt)
-
-        return 1
 
     def sell_CC(self, idx, cc_amount):
 
@@ -91,7 +95,7 @@ class Market(object):
         cc_value = self.get_CC_value(idx)
         sale_value = cc_value * cc_amount # value in USD
         
-        self.CC_balance[idx] = self.CC_balance - cc_amount # remove sold CC from balance
+        self.CC_balance[idx] = self.CC_balance[idx] - cc_amount # remove sold CC from balance
         
         self.balance = self.balance + sale_value # add sale value to USD balance
 
@@ -126,12 +130,14 @@ class Market(object):
             plt.plot(time, cc_value)
 
             if(sales.size != 0):
-                plt.plot(sales[:,0], sales[:,1], "*")
+                plt.plot(sales[:,0], sales[:,1], "*", markersize=15)
 
             if(buys.size != 0):
-                plt.plot(buys[:,0], buys[:,1], "^")
+                plt.plot(buys[:,0], buys[:,1], "o", markersize=15)
 
             plt.show()
+
+
 
 
 class Data(object):
