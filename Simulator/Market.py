@@ -160,6 +160,9 @@ class Data(object):
         self.frame = pd.concat(dfs)
         self.frame = self.frame.sort_index()
 
+        # resample so that everything is 30s apart
+        self.frame = self.frame.resample('30S').mean().interpolate(method='nearest')
+
     def get_closest(self, time):
 
         if time < self.get_start_time():
@@ -199,6 +202,7 @@ class Data(object):
     # returns the starting time index of tha dataset
     def get_start_time(self):
         return self.frame.index[0]
+
 class Statistics(object):
     def __init__(self):
         self.trades = []
