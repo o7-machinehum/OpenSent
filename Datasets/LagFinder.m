@@ -36,8 +36,12 @@ MinShiftel = MinShifthr*60*2;
 %filename = 'Oct/Oct3.csv';
 %filename = 'Oct/Oct4.csv';
 %filename = 'Oct/Oct5.csv';
-filename = 'Oct/Oct6.csv';
+%filename = 'Oct/Oct6.csv';
 %filename = 'Oct/Oct7.csv';
+%filename = 'Oct/Oct9.csv';
+%filename = 'Oct/Oct10.csv';
+%filename = 'Oct/Oct11.csv';
+filename = 'Oct/Oct18.csv';
 
 M = csvread(filename);
 
