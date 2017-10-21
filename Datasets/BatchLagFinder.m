@@ -1,10 +1,8 @@
 #!/usr/bin/octave-cli --persist
-%#!/usr/bin/octave-cli
 
 %-------------------------------------------------------------
 % Batch lag finder for processing a shit ton of data
-% 1. Use the print command to output the plot into a file
-% 2. Probablty drop in a date stamp - This needs to be done
+% 1. Make an entirely new vector -> /Date/Time/DiffSen/Volume/Lag
 %-------------------------------------------------------------
 pkg load signal;
 
@@ -126,10 +124,10 @@ xlabel('Time shift', 'FontSize', FontS);
 ylabel('Mean value (Lower is better)', 'FontSize', FontS);
 
 %break; %Break here - look at both plots then decide what lag to use
-output = sprintf('batchOutput/plots/%s_corrVectorShifteddiff.png', filename);
+output = sprintf('batchOutput/plots/DerivShifted_CorrVector/%s.png', filename);
 saveas(2, output);
 
-output = sprintf('batchOutput/plots/%s__corrVectorShiftedmag.png', filename);
+output = sprintf('batchOutput/plots/MagShifted_CorrVector/%s.png', filename);
 saveas(1, output);
 
 %Apply Lag
@@ -182,8 +180,12 @@ ylabel(ax2(1), 'Cost (USD)', 'FontSize', FontS);
 ylabel(ax2(2), 'Crypto Sentiment', 'FontSize', FontS);
 
 %Save the plots
-output = sprintf('batchOutput/plots/%s_diffShifted.png', filename);
+output = sprintf('batchOutput/plots/DerivShifted/%s.png', filename);
 saveas(2, output);
 
-output = sprintf('batchOutput/plots/%s_magShifted.png', filename);
+output = sprintf('batchOutput/plots/MagShifted/%s.png', filename);
 saveas(1, output);
+
+%New vector time
+%-------------------------------------------------------------
+
