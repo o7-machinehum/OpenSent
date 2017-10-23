@@ -14,14 +14,16 @@ windowSize = 50;
 def runningMeanFast(x, N):
 	return np.convolve(x, np.ones((N,))/N)[(N-1):]
 
-file = "../Datasets/Oct"
+#file = "../Datasets/Oct"
+file = "../Datasets/Contig" #Contingious dataset
+
 BTC = 0 #Index value
 
 sim = Market(file, 1000)
 
 #We need an initial amount of data to calculate the lag
-RequiredLag = 50*2*60 #10hrs * 2 * 60 to get to elements
-MaxShiftLen = 10*2*60
+RequiredLag = 10*2*60 #10hrs * 2 * 60 to get to elements
+MaxShiftLen = 5*2*60
 
 M = np.arange(2*RequiredLag, dtype = np.float).reshape(RequiredLag, 2)
 
@@ -65,5 +67,15 @@ for i in range(0,MaxShiftLen) :
 	meanResult[i] = np.mean(tValue - tSen);
 
 #4. Find lag
-plt.plot(meanResult)
+#plt.plot(meanResult)
+plt.plot(dSen)
 plt.show()
+
+#-----------------------Part Two (This is where the magic happens)------------------
+
+#1. Calculate lag (Done above)
+#2. Inc a fixed point in time (Lets start with 30 mins), filter the sentament, diff
+#3. If the slope is considered to be high (above a threshold) just buy or sell
+#4. Wait the time lag, sell or buy if money has been made
+
+
