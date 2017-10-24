@@ -1,9 +1,11 @@
+#!/usr/bin/python3
+
 from Market import Market
 
 from random import randint
 
 
-file = "/home/divgill/Documents/Crypto/cryptos/Datasets/Oct"
+file = "../Datasets/Oct"
 
 sim = Market(file, 1000)
 
