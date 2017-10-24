@@ -15,9 +15,12 @@ for i in range(0, 40):
 
     rand = randint(0, 100)
 
-    if rand < 25:
+    if rand > 75:
         print("Buy!!!!!!!!!!")
-        sim.buy_CC(0, rand * 8)
+        sim.buy_CC(0, rand * 4)
+    elif rand > 35 & rand < 65:
+        print("Sell!!!!!!!!!")
+        sim.sell_CC(0, sim.get_CC(0) * (rand / 100.0))
 
     sim.inc_time(10*60*60)
     print("****")

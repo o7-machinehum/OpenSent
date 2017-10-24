@@ -130,11 +130,12 @@ class Market(object):
             plt.plot(time, cc_value)
 
             if(sales.size != 0):
-                plt.plot(sales[:,0], sales[:,1], "*", markersize=15)
+                plt.plot(sales[:,0], sales[:,1], "*", markersize=15, label='sales')
 
             if(buys.size != 0):
-                plt.plot(buys[:,0], buys[:,1], "o", markersize=15)
+                plt.plot(buys[:,0], buys[:,1], "o", markersize=15, label='buys')
 
+            plt.legend()
             plt.show()
 
 
