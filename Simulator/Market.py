@@ -90,6 +90,7 @@ class Market(object):
     def sell_CC(self, idx, cc_amount):
 
         if cc_amount > self.CC_balance[idx]: # Not enough CC to sell
+            print(self.CC_balance[idx])
             return 0
 
         cc_value = self.get_CC_value(idx)

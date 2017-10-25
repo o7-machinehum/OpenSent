@@ -86,16 +86,19 @@ for i in range(0,len(SenOP)):
 	if SenOP[i] < min(SenOP) * Thresh:
 		SellTrigger = np.append(SellTrigger,  i)
 
+sim.buy_CC(BTC, 100);
+
 for i in range(0, tau):
 	if i in BuyTrigger:
 		print('Buying')
-		sim.buy_CC(BTC, 10)
+		print(sim.buy_CC(BTC, 10))
 	if i in SellTrigger:
 		print('Selling')
-		sim.sell_CC(BTC, 10)
+		print(sim.sell_CC(BTC, (10 / sim.get_CC_value(BTC))))
 	
-	#M[i,0] = sim.get_CC_value(BTC)
-	#M[i,1] = sim.get_sentiment(BTC)
+	M[i,0] = sim.get_CC_value(BTC)
+	M[i,1] = sim.get_sentiment(BTC)
+	
 	sim.inc_time(30)
 
 #Value = M[1:len(M), 0]
@@ -104,12 +107,3 @@ for i in range(0, tau):
 #Alright we've gone through one full tauL
 sim.sell_CC(BTC, sim.get_CC(BTC))
 sim.plot_trading_stats(BTC)
-
-#-----------------------Part Two (This is where the magic happens)------------------
-
-#1. Calculate lag (Done above)
-#2. Inc a fixed point in time (Lets start with 30 mins), filter the sentament, diff
-#3. If the slope is considered to be high (above a threshold) just buy or sell
-#4. Wait the time lag, sell or buy if money has been made
-
-
