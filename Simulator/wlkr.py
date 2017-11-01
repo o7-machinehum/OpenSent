@@ -17,12 +17,14 @@ def runningMeanFast(x, N):
 #file = "../Datasets/Oct"
 file = "../Datasets/Contig" #Contingious dataset
 
-Debug = True
+Debug = False
 
 BTC = 0 #Index value
 
 sim = Market(file, 1000)
 hrToSamples = 2*60
+SamplesTohr = 1 / (2*60)
+
 #We need an initial amount of data to calculate the lag
 tau = 10*hrToSamples #10hrs * 2 * 60 to get to elements
 tauD = 5*hrToSamples #How much shift are we allowing for time lag
@@ -41,13 +43,13 @@ for i in range(0, tau):
 
 #Everything above here is basically init code. Below should now loop.
 
-for k in range(0,20):
+for k in range(0,25):
 #1. Fitler both, sentiment is butter, cost should be moving average - done
 #--------------------------------------------------------------------
 	Value = M[1:len(M), 0]
 	Sen = M[1:len(M), 1]
 
-	b, a = butter(3, 0.1, btype='low')
+	b, a = butter(3, 0.01, btype='low')
 	Sen = lfilter(b, a, Sen)
 
 	Value = runningMeanFast(Value, windowSize)
@@ -79,15 +81,21 @@ for k in range(0,20):
 		meanResult[i] = np.mean(tValue - tSen);
 
 #4. Find lag
-#TODO: Start actually plotting the lag, Making sure no read hairing
+#**TODO: Start actually plotting the lag, Making sure no red hairing**
 #--------------------------------------------------------------------
 	tauL = meanResult.argmin()
 	SenOP = dSen[tau-tauL:tau]
 	
 	if Debug:
-		print(SenOP)
-		print(tauL)
-		
+		print('Operational Sentiment', SenOP)
+		print('LagTime',tauL*SamplesTohr)
+
+#4.5 Plotting for Debug
+	if Debug:
+		plt.plot(nValue);
+		plt.plot(nSen);
+		plt.show()
+
 #5. Find the buy and sell triggers
 #TODO: We want to minamize our buy and sell triggers
 #TODO: I don't know if this alternating sitch makes sense
@@ -105,13 +113,17 @@ for k in range(0,20):
 			if NextBuy == False:
 				SellTrigger = np.append(SellTrigger,  i)
 				NextBuy = True
-
-	#plt.plot(BuyTrigger, 'ro')
-	#plt.plot(SellTrigger, 'g^')
-	#plt.show();
+	
+	if Debug:
+		print('Buy Triggers > ', BuyTrigger)
+		print('Sell Triggers > ', SellTrigger)
+		#plt.plot(BuyTrigger, 'ro')
+		#plt.plot(SellTrigger, 'g^')
+		#plt.show();
 
 #6. Lets start to trade
-#TODO: If the value you're selling is lower, don't sell
+#TODO: If the value you're selling is lower, don't sell (Maybe)
+#TODO: Make sure the plotting is working properly - Print the times of selling and buying
 #--------------------------------------------------------------------
 	for i in range(0, tau):
 		if i in BuyTrigger:
@@ -129,7 +141,6 @@ for k in range(0,20):
 			
 		M[i,0] = sim.get_CC_value(BTC)
 		M[i,1] = sim.get_sentiment(BTC)
-		
 		sim.inc_time(30)
 
 #Alright we've gone through one full tauL
