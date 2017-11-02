@@ -17,7 +17,8 @@ def runningMeanFast(x, N):
 #file = "../Datasets/Oct"
 file = "../Datasets/Contig" #Contingious dataset
 
-Debug = False
+Debug = True
+Plot = False 
 
 BTC = 0 #Index value
 
@@ -33,12 +34,15 @@ tauD = 5*hrToSamples #How much shift are we allowing for time lag
 Thresh = 0.6 
 
 M = np.arange(2*tau, dtype = np.float).reshape(tau, 2)
+time = [None] * tau
 
 #Initial lag finder
 #--------------------------------------------------------------------
 for i in range(0, tau):
 	M[i,0] = sim.get_CC_value(BTC)
 	M[i,1] = sim.get_sentiment(BTC)
+	time[i] = sim.get_time()
+	
 	sim.inc_time(30)
 
 #Everything above here is basically init code. Below should now loop.
@@ -81,38 +85,53 @@ for k in range(0,25):
 		meanResult[i] = np.mean(tValue - tSen);
 
 #4. Find lag
-#**TODO: Start actually plotting the lag, Making sure no red hairing**
 #--------------------------------------------------------------------
 	tauL = meanResult.argmin()
 	SenOP = dSen[tau-tauL:tau]
-	
+	timeOP = time[tau-tauL:tau]
+
+#	if Plot:
+		#plt.plot(timeOP, SenOP)
+		#plt.show()
+
 	if Debug:
-		print('Operational Sentiment', SenOP)
+		#print('Operational Sentiment', SenOP)
 		print('LagTime',tauL*SamplesTohr)
 
 #4.5 Plotting for Debug
-	if Debug:
+	if Plot:
 		plt.plot(nValue);
 		plt.plot(nSen);
 		plt.show()
 
 #5. Find the buy and sell triggers
-#TODO: We want to minamize our buy and sell triggers
-#TODO: I don't know if this alternating sitch makes sense
 	NextBuy = True
 #--------------------------------------------------------------------
 	BuyTrigger = np.array(1)
 	SellTrigger = np.array(1)
+	
+	#Clear dat shit out
+	BuyTrigger = []
+	SellTrigger = []
+
+	BuySen = 0.006
+	SellSen = -1*BuySen
+
+	if Debug:
+		print('Previous Buy Triggers > ', BuyTrigger)
+		print('Previous Sell Triggers > ', SellTrigger)
 
 	for i in range(0,len(SenOP)):
-		if SenOP[i] > max(SenOP) * Thresh:
-			if NextBuy == True:
-				BuyTrigger = np.append(BuyTrigger, i)
-				NextBuy = False
-		if SenOP[i] < min(SenOP) * Thresh:
-			if NextBuy == False:
-				SellTrigger = np.append(SellTrigger,  i)
-				NextBuy = True
+		#if SenOP[i] > max(SenOP) * Thresh:
+		if SenOP[i] > BuySen:
+			#if NextBuy == True:
+			BuyTrigger = np.append(BuyTrigger, i)
+			NextBuy = False
+		#if SenOP[i] < min(SenOP) * Thresh:
+		if SenOP[i] < SellSen:
+			#if NextBuy == False:
+			SellTrigger = np.append(SellTrigger,  i)
+			NextBuy = True
 	
 	if Debug:
 		print('Buy Triggers > ', BuyTrigger)
@@ -128,13 +147,13 @@ for k in range(0,25):
 	for i in range(0, tau):
 		if i in BuyTrigger:
 			if Debug:
-				print('Buying')
+				print('Buying at: ', sim.get_time())
 				print(sim.buy_CC(BTC, 10))
 			else:
 				sim.buy_CC(BTC, 10);
 		if i in SellTrigger:
 			if Debug:
-				print('Selling')
+				print('Selling at: ', sim.get_time())
 				print(sim.sell_CC(BTC, (10 / sim.get_CC_value(BTC))))
 			else:
 				sim.sell_CC(BTC, (10 / sim.get_CC_value(BTC)))
