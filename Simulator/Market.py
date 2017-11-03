@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 import glob
@@ -162,7 +161,15 @@ class Data(object):
             df.drop('time', axis=1, inplace=True)
             df.drop('date', axis=1, inplace=True)
 
+            
+            print('Loading File:', f)
             df['datetime'] = pd.to_datetime(df['datetime'], format='%m/%d/%Y  %H/%M/%S')
+            
+            #try:
+            #  df['datetime'] = pd.to_datetime(df['datetime'], format='%m/%d/%Y  %H/%M/%S')
+            #  break;
+            #except ValueError:
+            #  print('SUS File:', f)
 
             df = df.set_index(df['datetime'])
             df.drop('datetime', axis=1, inplace=True)

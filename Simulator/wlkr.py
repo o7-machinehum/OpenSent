@@ -14,8 +14,8 @@ windowSize = 50;
 def runningMeanFast(x, N):
 	return np.convolve(x, np.ones((N,))/N)[(N-1):]
 
-#file = "../Datasets/Oct"
-file = "../Datasets/Contig" #Contingious dataset
+file = "../Datasets/Oct"
+#file = "../Datasets/Contig" #Contingious dataset
 
 Debug = True
 Plot = False 
