@@ -3,6 +3,7 @@ import pandas as pd
 import glob
 import datetime
 import matplotlib.pyplot as plt
+import pdb
 
 class Market(object):
 
@@ -154,15 +155,16 @@ class Data(object):
                           "eth_sent_vol", "eth_sent", "eth_val"]
 
         for f in self.files:
+            print('Loading File:', f)
             df = pd.read_csv(f, header=None, usecols=[0, 1, 3, 4, 5, 7, 8, 9, 11, 12, 13])
             df.columns = labels
+            
 
             df['datetime'] = df['date'] + ' ' + df['time']
             df.drop('time', axis=1, inplace=True)
             df.drop('date', axis=1, inplace=True)
 
             
-            print('Loading File:', f)
             df['datetime'] = pd.to_datetime(df['datetime'], format='%m/%d/%Y  %H/%M/%S')
             
             #try:
@@ -179,10 +181,15 @@ class Data(object):
         self.frame = pd.concat(dfs)
         self.frame = self.frame.sort_index()
 
-        self.frame[['btc_val', 'ltc_val', 'eth_val']] = self.frame[['btc_val', 'ltc_val', 'eth_val']].apply(pd.to_numeric, errors='coerce')
-        # resample so that everything is 30s apart
-        self.frame = self.frame.resample('30S').mean().interpolate(method='nearest')
+        self.frame[['btc_val', 'btc_sent', 'ltc_val', 'ltc_sent', 'eth_val', 'eth_sent']] = self.frame[['btc_val','btc_sent', 'ltc_val', 'ltc_sent', 'eth_val', 'eth_sent']].apply(pd.to_numeric, errors='coerce')
+        #self.frame = self.frame.astype(float)
 
+        # resample so that everything is 30s apart
+        
+        self.frame = self.frame.dropna(how='any')
+        self.frame = self.frame.ix[(self.frame['btc_val'] > 3000) & (self.frame['btc_val'] < 10000)] 
+        self.frame = self.frame.resample('30S').mean().interpolate(method='nearest') #wlkr- this was breaking shit
+    
     def get_closest(self, time):
          return self.frame.loc[time]
 

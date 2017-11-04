@@ -15,9 +15,9 @@ def runningMeanFast(x, N):
 	return np.convolve(x, np.ones((N,))/N)[(N-1):]
 
 file = "../Datasets/Oct"
-#file = "../Datasets/Contig" #Contingious dataset
+#file = "../Datasets/Temp" 
 
-Debug = True
+Debug = False
 Plot = False 
 
 BTC = 0 #Index value
@@ -36,18 +36,20 @@ Thresh = 0.6
 M = np.arange(2*tau, dtype = np.float).reshape(tau, 2)
 time = [None] * tau
 
+sim.inc_time(30)
+
 #Initial lag finder
 #--------------------------------------------------------------------
 for i in range(0, tau):
 	M[i,0] = sim.get_CC_value(BTC)
 	M[i,1] = sim.get_sentiment(BTC)
 	time[i] = sim.get_time()
+	print(i);
 	
-	sim.inc_time(30)
 
 #Everything above here is basically init code. Below should now loop.
 
-for k in range(0,25):
+for k in range(0,100):
 #1. Fitler both, sentiment is butter, cost should be moving average - done
 #--------------------------------------------------------------------
 	Value = M[1:len(M), 0]

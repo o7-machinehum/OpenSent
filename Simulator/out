@@ -1,0 +1,10 @@
+> /home/machinehum/cryptos/Simulator/Market.py(163)__init__()
+-> df['datetime'] = df['date'] + ' ' + df['time']
+(Pdb) (Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) 
