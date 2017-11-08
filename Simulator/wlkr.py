@@ -174,9 +174,27 @@ for k in range(0,75):
 			sim.inc_time(30)
 
 #Method Two - Buy on buy triggers and sell when gains higher %10
-#						- If high density of sell triggers sell
 #--------------------------------------------------------------------
 	if Method == 'TycoonJoe':
+		buyPoint = 1000000.123412 #blaaa
+		Lastsell = 0
+		for i in range(0, tau):
+			if i in BuyTrigger:
+				sim.buy_CC(BTC, 0.5*sim.get_USD())
+				buyPoint = sim.get_CC_value(BTC)
+			
+			if sim.get_CC_value(BTC) > (buyPoint + buyPoint*0.01):
+				if i > Lastsell + 1*hrToSamples:
+					sim.sell_CC(BTC, (0.5*sim.get_USD() / sim.get_CC_value(BTC)))
+					Lastsell = i
+
+			M[i,0] = sim.get_CC_value(BTC)
+			M[i,1] = sim.get_sentiment(BTC)
+			sim.inc_time(30)
+
+#Method Three - Buy on buy triggers and sell when gains higher %10
+#--------------------------------------------------------------------
+	if Method == 'Harry':
 		buyPoint = 1000000.123412 #blaaa
 		Lastsell = 0
 		for i in range(0, tau):
