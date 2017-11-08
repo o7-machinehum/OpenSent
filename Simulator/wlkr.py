@@ -20,7 +20,8 @@ def runningMeanFast(x, N):
 #Trading methods
 #--------------------------------------------------------------------
 #Method = 'SimpleSam'
-Method = 'TycoonJoe'
+#Method = 'TycoonJoe'
+Method = 'SmartSally'
 
 file = "../Datasets/Oct"
 #file = "../Datasets/Contig" 
@@ -40,7 +41,6 @@ tau = 10*hrToSamples #10hrs * 2 * 60 to get to elements
 tauD = 5*hrToSamples #How much shift are we allowing for time lag
 
 #Thresholding - this is used when finding buy/sell triggers
-Thresh = 0.9 
 
 M = np.arange(2*tau, dtype = np.float).reshape(tau, 2)
 time = [None] * tau
@@ -115,41 +115,34 @@ for k in range(0,75):
 		plt.show()
 
 #5. Find the buy and sell triggers
+#TODO: Put actual value of sentament inside the sell/buy Triggers
+#			 Because right now it's first come first serve, the bot should
+#      be buying/selling on the largest sentiment!
 #--------------------------------------------------------------------
 	BuyTrigger = np.array(1)
 	SellTrigger = np.array(1)
+	
+	#Theshold that generates buy and sell triggers
+	Thresh = 0.98
 	
 	#Clear dat shit out
 	BuyTrigger = []
 	SellTrigger = []
 
-	BuySen = 0.006
-	SellSen = -1*BuySen
-
 	if Debug:
 		print('Previous Buy Triggers > ', BuyTrigger)
 		print('Previous Sell Triggers > ', SellTrigger)
 
-	LastSenOPbuy = 0
-	LastSenOPsell = 0
-
 	for i in range(0,len(SenOP)):
 		if SenOP[i] > max(SenOP) * Thresh:
-			if i > LastSenOPbuy + 1*hrToSamples:
-				BuyTrigger = np.append(BuyTrigger, i)
-				LastSenOPbuy = i #To avoid continious buying
+			BuyTrigger = np.append(BuyTrigger, i)
 
-		if SenOP[i] < min(SenOP) * Thresh:
-			if i > LastSenOPsell + 1*hrToSamples:
-				SellTrigger = np.append(SellTrigger,  i)
-				LastSenOPsell = i
+		if abs(SenOP[i]) > abs(min(SenOP) * Thresh):
+			SellTrigger = np.append(SellTrigger,  i)
 	
 	if Debug:
 		print('Buy Triggers > ', BuyTrigger)
 		print('Sell Triggers > ', SellTrigger)
-		#plt.plot(BuyTrigger, 'ro')
-		#plt.plot(SellTrigger, 'g^')
-		#plt.show();
 
 #6. Lets start to trade
 #--------------------------------------------------------------------
@@ -192,19 +185,37 @@ for k in range(0,75):
 			M[i,1] = sim.get_sentiment(BTC)
 			sim.inc_time(30)
 
-#Method Three - Buy on buy triggers and sell when gains higher %10
+#Method Three - Buy on buy & sell triggers 
+#							- Sell when gains higher SellThresh
+#							- Buy when gains lower then BuyThresh
 #--------------------------------------------------------------------
-	if Method == 'Harry':
-		buyPoint = 1000000.123412 #blaaa
+	if Method == 'SmartSally':
+
+		#Basic init stuff
+		buyPoint = 10000 #blaaa
 		Lastsell = 0
+		sellPoint = 0.0 #blaaa
+		Lastbuy = 0
+
+		#Parameters
+		BuyThresh = 0.01
+		SellThresh = 0.01
+		BuyAmount = 0.5 #%of wallet (USD) to spend on buy triggers
+		SellAmount = 0.1 #%of wallet (BTC) to spend on sell triggers
+		MaxTradePhr = 1
+
 		for i in range(0, tau):
-			if i in BuyTrigger:
-				sim.buy_CC(BTC, 0.5*sim.get_USD())
-				buyPoint = sim.get_CC_value(BTC)
+			if (i in BuyTrigger) or (sim.get_CC_value(BTC) < (sellPoint*SellThresh)):
+				if i > Lastbuy + MaxTradePhr*hrToSamples:
+					sim.buy_CC(BTC, BuyAmount*sim.get_USD())
+					buyPoint = sim.get_CC_value(BTC)
+					lastBuy = i
 			
-			if sim.get_CC_value(BTC) > (buyPoint + buyPoint*0.01):
-				if i > Lastsell + 1*hrToSamples:
-					sim.sell_CC(BTC, (0.5*sim.get_USD() / sim.get_CC_value(BTC)))
+			if (i in SellTrigger) or (sim.get_CC_value(BTC) > (buyPoint + buyPoint*BuyThresh)):
+				if i > Lastsell + MaxTradePhr*hrToSamples:
+					#pdb.set_trace()
+					sim.sell_CC(BTC, (SellAmount*sim.get_CC(BTC)))
+					sellPoint = sim.get_CC_value(BTC)
 					Lastsell = i
 
 			M[i,0] = sim.get_CC_value(BTC)
