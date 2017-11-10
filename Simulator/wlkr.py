@@ -19,9 +19,9 @@ def runningMeanFast(x, N):
 
 #Trading methods
 #--------------------------------------------------------------------
-#Method = 'SimpleSam'
+Method = 'SimpleSam'
 #Method = 'TycoonJoe'
-Method = 'SmartSally'
+#Method = 'SmartSally'
 
 file = "../Datasets/Oct"
 #file = "../Datasets/Contig" 
@@ -128,6 +128,8 @@ for k in range(0,75):
 	#Clear dat shit out
 	BuyTrigger = []
 	SellTrigger = []
+	BuyTriggerMag = [] #This is a super balls hacky way, but I want to make it backwards compatable
+	SellTriggerMag = []
 
 	if Debug:
 		print('Previous Buy Triggers > ', BuyTrigger)
@@ -136,9 +138,11 @@ for k in range(0,75):
 	for i in range(0,len(SenOP)):
 		if SenOP[i] > max(SenOP) * Thresh:
 			BuyTrigger = np.append(BuyTrigger, i)
+			BuyTriggerMag = np.append(BuyTriggerMag, SenOP[i])
 
-		if abs(SenOP[i]) > abs(min(SenOP) * Thresh):
+		if SenOP[i] < (min(SenOP) * Thresh):
 			SellTrigger = np.append(SellTrigger,  i)
+			SellTriggerMag = np.append(SellTriggerMag, SenOP[i])
 	
 	if Debug:
 		print('Buy Triggers > ', BuyTrigger)
@@ -203,6 +207,10 @@ for k in range(0,75):
 		BuyAmount = 0.5 #%of wallet (USD) to spend on buy triggers
 		SellAmount = 0.1 #%of wallet (BTC) to spend on sell triggers
 		MaxTradePhr = 1
+
+		#Preconditioning Buy/Sell Triggers
+		BuyTrigger = np.take(BuyTrigger, np.argsort(BuyTriggerMag)[::-1][0:3])
+		SellTrigger = np.take(SellTrigger, np.argsort(SellTriggerMag)[0:3])
 
 		for i in range(0, tau):
 			if (i in BuyTrigger) or (sim.get_CC_value(BTC) < (sellPoint*SellThresh)):
