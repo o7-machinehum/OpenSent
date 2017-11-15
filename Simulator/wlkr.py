@@ -19,28 +19,28 @@ def runningMeanFast(x, N):
 
 #Trading methods
 #--------------------------------------------------------------------
-Method = 'SimpleSam'
-#Method = 'TycoonJoe'
+#Method = 'SimpleSam'
+Method = 'TycoonJoe'
 #Method = 'SmartSally'
 
-file = "../Datasets/Oct"
+#file = "../Datasets/Oct"
+file = "../Datasets/Nov"
 #file = "../Datasets/Contig" 
 
 DebugBreaks = True
-Debug = False
+Debug = True
 Plot = False 
 
 BTC = 0 #Index value
+dataSize = 25
 
 sim = Market(file, 1000)
 hrToSamples = 2*60
 SamplesTohr = 1 / (2*60)
 
 #We need an initial amount of data to calculate the lag
-tau = 10*hrToSamples #10hrs * 2 * 60 to get to elements
+tau = 20*hrToSamples #10hrs * 2 * 60 to get to elements
 tauD = 5*hrToSamples #How much shift are we allowing for time lag
-
-#Thresholding - this is used when finding buy/sell triggers
 
 M = np.arange(2*tau, dtype = np.float).reshape(tau, 2)
 time = [None] * tau
@@ -55,13 +55,11 @@ for i in range(0, tau):
 	time[i] = sim.get_time()
 	sim.inc_time(30)
 
-#Everything above here is basically init code. Below should now loop.
-
-for k in range(0,75):
+for k in range(0,dataSize):
 #1. Fitler both, sentiment is butter, cost should be moving average - done
 #--------------------------------------------------------------------
-	Value = M[1:len(M), 0]
-	Sen = M[1:len(M), 1]
+	Value = M[0:len(M), 0]
+	Sen = M[0:len(M), 1]
 
 	b, a = butter(3, 0.01, btype='low')
 	Sen = lfilter(b, a, Sen)
@@ -89,7 +87,7 @@ for k in range(0,75):
 
 	meanResult = np.zeros(tauD)
 
-	for i in range(0,tauD) :
+	for i in range(0,tauD):
 		tValue = tValue[1:len(tValue)];
 		tSen = tSen[0:len(tSen) - 1];
 		meanResult[i] = np.mean(tValue - tSen);
@@ -208,20 +206,25 @@ for k in range(0,75):
 		SellAmount = 0.1 #%of wallet (BTC) to spend on sell triggers
 		MaxTradePhr = 1
 
-		#Preconditioning Buy/Sell Triggers
+		#Preconditioning Buy/Sell Triggers (Take top magnitude triggers)
 		BuyTrigger = np.take(BuyTrigger, np.argsort(BuyTriggerMag)[::-1][0:3])
 		SellTrigger = np.take(SellTrigger, np.argsort(SellTriggerMag)[0:3])
 
 		for i in range(0, tau):
 			if (i in BuyTrigger) or (sim.get_CC_value(BTC) < (sellPoint*SellThresh)):
 				if i > Lastbuy + MaxTradePhr*hrToSamples:
+					if Debug:
+						print('Buying:', BuyAmount*sim.get_USD(), 'USD worth of BTC at', sim.get_CC_value(BTC))
+						print('Wallet: ', sim.get_USD(), 'USD', sim.get_CC(BTC), 'BTC')
 					sim.buy_CC(BTC, BuyAmount*sim.get_USD())
 					buyPoint = sim.get_CC_value(BTC)
 					lastBuy = i
 			
 			if (i in SellTrigger) or (sim.get_CC_value(BTC) > (buyPoint + buyPoint*BuyThresh)):
 				if i > Lastsell + MaxTradePhr*hrToSamples:
-					#pdb.set_trace()
+					if Debug:
+						print('Selling:', SellAmount*sim.get_CC(BTC),'BTC', sim.get_CC_value(BTC))
+						print('Wallet: ', sim.get_USD(), 'USD', sim.get_CC(BTC), 'BTC')
 					sim.sell_CC(BTC, (SellAmount*sim.get_CC(BTC)))
 					sellPoint = sim.get_CC_value(BTC)
 					Lastsell = i
