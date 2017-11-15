@@ -16,7 +16,7 @@ ShiftMethod = 'diff'; %Differential shift method
 %ShiftMethod = 'man'; %Manual shift method
 grid on
 
-MaxShifthr = 5;
+MaxShifthr = 7;
 MaxShiftel = MaxShifthr*60*2;
 
 MinShifthr = 1; %Lets ignore a possible time lag less than 1hr
@@ -43,9 +43,16 @@ MinShiftel = MinShifthr*60*2;
 %filename = 'Oct/Oct11.csv';
 %filename = 'Oct/Oct18.csv';
 
-filename = 'Nov/Nov01.csv';
-
-
+%filename = 'Nov/Nov01.csv';
+%filename = 'Nov/Nov05.csv';
+%filename = 'Nov/Nov06.csv';
+%filename = 'Nov/Nov07.csv';
+%filename = 'Nov/Nov08.csv';
+%filename = 'Nov/Nov09.csv';
+%filename = 'Nov/Nov10.csv';
+%filename = 'Nov/Nov11.csv';
+%filename = 'Nov/Nov12.csv';
+filename = 'Nov/Nov13.csv';
 
 M = csvread(filename);
 
@@ -168,6 +175,7 @@ tit = strcat(tit, filename);
 x2 = x2 + lag;
 
 figure(1)
+subplot(2,1,1)
 ax2 = plotyy(x, filteredCost - mean(filteredCost), x2, filteredSen - mean(filteredSen));
 grid on
 legend('Cost', 'Sentiment (timeshifted)');
@@ -175,13 +183,18 @@ title(tit, 'FontSize', FontS);
 xlabel('Time', 'FontSize', FontS);
 ylabel(ax2(1), 'Cost (USD)', 'FontSize', FontS);
 ylabel(ax2(2), 'Crypto Sentiment', 'FontSize', FontS);
+hold on
+
+subplot(2,1,2)
+%plotyy(x, diff(filteredCost), x2, diff(filteredSen));
+%break
 
 %Taking derive remove element
 x(end) = [];
 x2(end) = [];
 
 tit = strcat('diff',tit);
-figure(2)
+%figure(2)
 ax2 = plotyy(x, diff(filteredCost), x2, diff(filteredSen));
 grid on
 legend('dCost/dt', 'dSentiment/dt (timeshifted)');
