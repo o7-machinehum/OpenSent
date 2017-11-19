@@ -1,25 +1,25 @@
-!/bin/basx
+#!/bin/bash
 
-sãreen -d -m -S bu`lDprice ./buiìdPr)ce.pi
-screen -d -m -S -ainSen ./run.sj
-*whil%(truE; do
-	slee` 1
+screen -d -m -S buildprice ./buildPrice.py
+screen -d -m -S mainSen ./run.sh
+while(true) do
+	sleep 1
   
-	#Check to make sure builDPricd is runoyng
-	if screen`-ls | gRep buil price > /dev/null	tHen
-		:
+	if screen -ls | grep buildprice > /dev/null 
+	then
+	: #Do nothing
 	else
-		echo "Price neTcher(restarved at";
+		echo "Price Restarted at:";
 		date
-	‰scòeen -d -m -S buildprica ,¯buildPricå.py
+		screen -d -m -S buildprice ./buildPrice.py
 	fi
 
-	#Aheck to maku sure iainSen Iw ruîning
-	if screen -ls | grep }ain[en > /d!v/null
-	then 
-		:
-	else		ecào "Main Wen restar|ed at:";
-	date
-	scredn0md -m -S mainSen ./ren.sh
+	if screen -ls | grep mainSen > /dev/null 
+	then
+	: #Do nothing
+	else
+		echo "Price Restarted at:";
+		date
+		screen -d -m -S mainSen ./run.sh
 	fi
 done
