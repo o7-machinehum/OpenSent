@@ -38,6 +38,17 @@ def writeUpdates(filename, coins, tracker):
             outfile.write("%s,%d ,%s,%s," % (coin[0], tracker['Volume'][coin[0]], tracker['Sentiment'][coin[0]]['avg'], fetch.fetchPrice(coin[0])))
             outfile.flush()
 
+    #Instead of appending, write most current other file
+    filename = filename + '1l'
+    with open(filename, 'w') as outfile:
+        t = datetime.datetime.now()
+        outfile.write(t.strftime('\n%m/%d/%Y, %H/%M/%S, '))
+        for coin in coins:
+            outfile.write("%s,%d ,%s,%s," % (coin[0], tracker['Volume'][coin[0]], tracker['Sentiment'][coin[0]]['avg'], fetch.fetchPrice(coin[0])))
+            outfile.flush()
+
+
+
 def elapsedTime(start):
     return (time.time()-start)
 
