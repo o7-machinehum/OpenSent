@@ -11,14 +11,27 @@ import push
 import RT
 import numpy as np
 import scipy as sp
-#import matplotlib.pyplot as plt
 import pdb
 import time
+import Log
 
 windowSize = 50;
 
 def runningMeanFast(x, N):
 	return np.convolve(x, np.ones((N,))/N)[(N-1):]
+
+def waitForGoodData():
+	Timeout = 0;
+	while(True):
+		if RT.CheckDataFrame() == True: #If we have bad data
+			Log.write('Bad Data AF')
+			time.sleep(30)
+			Timeout += 1
+			if Timeout > 5:
+				Log.write('Bad data timeout, Servercrash or eq.')
+				break
+		else:
+			break;
 
 Debug = True
 
@@ -37,19 +50,22 @@ Time = [None] * tau
 #Initial lag finder
 #--------------------------------------------------------------------
 while(True):
+	waitForGoodData()
 	M[0,0] = RT.get_CC()
 	M[0,1] = RT.get_sentiment()
 	Time[0] = RT.get_time()
 	time.sleep(30)
 
 	for i in range(1, tau):
+		waitForGoodData()
 		Time[i] = RT.get_time()
 		
 		if Time[i] == Time[i-1]:
 			time.sleep(15)
 			Time[i] = RT.get_time()
 			if Time[i] == Time[i-1]:
-				push.dump('Sentiment script not running' ,'ERROR:')
+				Log.write('Bad data timeout, Servercrash or eq.')
+				#push.dump('Sentiment script not running' ,'ERROR:')
 
 		M[i,0] = RT.get_CC()
 		M[i,1] = RT.get_sentiment()
