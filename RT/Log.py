@@ -14,5 +14,5 @@ def getDate():
 #Log to a file
 def Write(string):
 	f = open(Logdir + getDate(), mode='a')
-	f.write(getTime() + ':' + string)
+	f.write(getTime() + ':' + string + '\n')
 	f.close()

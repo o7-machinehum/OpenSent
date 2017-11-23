@@ -2,6 +2,7 @@
 #Super dogshit code, just set up for BTC rn
 
 import urllib.request
+import Log
 import pdb
 
 Host = '192.168.10.12'
@@ -39,16 +40,21 @@ def CheckDataFrame():
 
 	if len(Cryptos) != 14:
 		BadDataFrame = True
-	elif Cryptos[0] == ('None' or 'N/A'):
+		Log.Write('ERROR: Length Mismatch')	
+	elif Cryptos[0] == 'None' or  Cryptos[0] == 'N/A':
 		BadDataFrame = True
-	elif Cryptos[1] == ('None' or 'N/A'):
+		Log.Write('ERROR: Data Invalid')	
+	elif Cryptos[1] == 'None' or  Cryptos[1] == 'N/A':
 		BadDataFrame = True
-	elif Cryptos[3] == ('None' or 'N/A'):
+		Log.Write('ERROR: Data Invalid')	
+	elif Cryptos[3] == 'None' or  Cryptos[3] == 'N/A':
 		BadDataFrame = True
-	elif Cryptos[4] == ('None' or 'N/A'):
+		Log.Write('ERROR: Data Invalid')	
+	elif Cryptos[4] == 'None' or  Cryptos[4] == 'N/A':
 		BadDataFrame = True
+		Log.Write('ERROR: Data Invalid')	
 	else:
 		BadDataFrame = False
-	
+
 	return BadDataFrame
 

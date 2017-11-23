@@ -24,11 +24,10 @@ def waitForGoodData():
 	Timeout = 0;
 	while(True):
 		if RT.CheckDataFrame() == True: #If we have bad data
-			Log.write('Bad Data AF')
 			time.sleep(30)
 			Timeout += 1
 			if Timeout > 5:
-				Log.write('Bad data timeout, Servercrash or eq.')
+				Log.Write('Bad data timeout, Servercrash or eq.')
 				break
 		else:
 			break;
@@ -62,6 +61,7 @@ while(True):
 		
 		if Time[i] == Time[i-1]:
 			time.sleep(15)
+			waitForGoodData()
 			Time[i] = RT.get_time()
 			if Time[i] == Time[i-1]:
 				Log.write('Bad data timeout, Servercrash or eq.')
@@ -137,5 +137,5 @@ while(True):
 			SellTriggerMag = np.append(SellTriggerMag, SenOP[i])
 	
 	if Debug:
-		push.dump(BuyTrigger ,'BuyTgr_tauL = ' + tauL)
-		push.dump(SellTrigger ,'SellTgr_tauL = ' + tauL)
+		push.dump(str(BuyTrigger*SamplesTohr) ,'BuyTgr_tauL = ' + str(tauL*SamplesTohr))
+		push.dump(str(SellTrigger*SamplesTohr) ,'SellTgr_tauL = ' + str(tauL*SamplesTohr))
