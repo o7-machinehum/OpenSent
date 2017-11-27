@@ -4,6 +4,7 @@
 import urllib.request
 import Log
 import pdb
+import time
 
 Host = '192.168.10.12'
 
@@ -22,8 +23,24 @@ def LoadFromHTML():
 	return Cryptos
 
 def get_time():
-	Cryptos = LoadFromHTML()
-	return(Cryptos[1])
+	Timeout = 0
+	
+	while True:
+		Cryptos = LoadFromHTML()
+		try:
+			Time = Cryptos[1]
+			Timeout = 0
+			break
+		except:
+			Log.Write('ERROR: Time Value Exception')	
+			time.sleep(30)
+			Timeout += 1
+		
+		if Timeout > 10:
+			Log.Write('ERROR: Time: Timeout Exception')	
+			break
+			
+	return(Time)
 
 def get_CC():
 	Cryptos = LoadFromHTML()

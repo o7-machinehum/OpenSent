@@ -30,6 +30,7 @@ def waitForGoodData():
 				Log.Write('Bad data timeout, Servercrash or eq.')
 				break
 		else:
+			Timeout = 0
 			break;
 
 Debug = True
