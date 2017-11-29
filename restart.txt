@@ -1,1 +1,4 @@
 Thu Nov 23 08:25:49 PST 2017 Starting
+Sun Nov 26 19:59:12 PST 2017 Starting
+Tue Nov 28 18:39:49 PST 2017 Exited with status 1
+Tue Nov 28 18:39:49 PST 2017 Restarting
