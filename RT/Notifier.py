@@ -136,7 +136,8 @@ while(True):
 		if SenOP[i] < (min(SenOP) * Thresh):
 			SellTrigger = np.append(SellTrigger,  i)
 			SellTriggerMag = np.append(SellTriggerMag, SenOP[i])
-	
+
 	if Debug:
-		push.dump(str(BuyTrigger*SamplesTohr) ,'BuyTgr_tauL = ' + str(tauL*SamplesTohr))
-		push.dump(str(SellTrigger*SamplesTohr) ,'SellTgr_tauL = ' + str(tauL*SamplesTohr))
+		push.dump(str(BuyTrigger*SamplesTohr) + str(BuyTriggerMag) ,'BuyTgr_tauL = ' + str(tauL*SamplesTohr))
+		push.dump(str(SellTrigger*SamplesTohr) + str(SellTriggerMag) ,'SellTgr_tauL = ' + str(tauL*SamplesTohr))
+		push.dump(str(SenOP / len(SenOP)))
