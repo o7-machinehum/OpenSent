@@ -19,8 +19,9 @@ FontS = 20;
 %filename = 'Sept/Sept20_2017.csv';
 %filename = 'Sept/Sept17_2017.csv';
 
-filename = 'Oct/Sept29-Oct1.csv';
-filename = 'Oct/Oct9.csv';
+%filename = 'Oct/Sept29-Oct1.csv';
+%filename = 'Oct/Oct9.csv';
+filename = 'test/trendTest.csv';
 
 M = csvread(filename);
 
@@ -41,9 +42,9 @@ ETHvol = 12;
 ETHsen = 13;
 ETHcost = 14;
 
-Cost = M(1:end, LTCcost);
-Sen = M(1:end, LTCsen);
-Vol = M(1:end, LTCvol);
+Cost = M(1:end, BTCcost);
+Sen = M(1:end, BTCsen);
+Vol = M(1:end, BTCvol);
 
 %Cost = M(1:end, LTCcost);
 %Sen = M(1:end, LTCsen);

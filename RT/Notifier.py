@@ -68,6 +68,7 @@ while(True):
 				Log.write('Bad data timeout, Servercrash or eq.')
 				#push.dump('Sentiment script not running' ,'ERROR:')
 
+		waitForGoodData()
 		M[i,0] = RT.get_CC()
 		M[i,1] = RT.get_sentiment()
 		time.sleep(30)
@@ -138,6 +139,6 @@ while(True):
 			SellTriggerMag = np.append(SellTriggerMag, SenOP[i])
 
 	if Debug:
-		push.dump(str(BuyTrigger*SamplesTohr) + str(BuyTriggerMag) ,'BuyTgr_tauL = ' + str(tauL*SamplesTohr))
-		push.dump(str(SellTrigger*SamplesTohr) + str(SellTriggerMag) ,'SellTgr_tauL = ' + str(tauL*SamplesTohr))
-		push.dump(str(SenOP / len(SenOP)))
+		push.dump('Time(hr):' + str(BuyTrigger*SamplesTohr) + 'Mags:' + str(BuyTriggerMag) ,'BuyTgr_tauL = ' + str(tauL*SamplesTohr))
+		push.dump('Time(hr):' + str(SellTrigger*SamplesTohr) + 'Mags:' + str(SellTriggerMag) ,'SellTgr_tauL = ' + str(tauL*SamplesTohr))
+		push.dump(str(sum(SenOP) / len(SenOP)), 'Average Sent')
