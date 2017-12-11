@@ -58,16 +58,16 @@ def CheckDataFrame():
 	if len(Cryptos) != 14:
 		BadDataFrame = True
 		Log.Write('ERROR: Length Mismatch')	
-	elif Cryptos[0] == 'None' or  Cryptos[0] == 'N/A':
+	elif Cryptos[0] == 'None' or  Cryptos[0] == 'N/A' or Cryptos[0] == '':
 		BadDataFrame = True
 		Log.Write('ERROR: Data Invalid')	
-	elif Cryptos[1] == 'None' or  Cryptos[1] == 'N/A':
+	elif Cryptos[1] == 'None' or  Cryptos[1] == 'N/A' or Cryptos[1] == '':
 		BadDataFrame = True
 		Log.Write('ERROR: Data Invalid')	
-	elif Cryptos[3] == 'None' or  Cryptos[3] == 'N/A':
+	elif Cryptos[3] == 'None' or  Cryptos[3] == 'N/A' or Cryptos[3] == '':
 		BadDataFrame = True
 		Log.Write('ERROR: Data Invalid')	
-	elif Cryptos[4] == 'None' or  Cryptos[4] == 'N/A':
+	elif Cryptos[4] == 'None' or  Cryptos[4] == 'N/A' or Cryptos[4] == '':
 		BadDataFrame = True
 		Log.Write('ERROR: Data Invalid')	
 	else:
