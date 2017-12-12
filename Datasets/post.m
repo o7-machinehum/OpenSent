@@ -21,7 +21,8 @@ FontS = 20;
 
 %filename = 'Oct/Sept29-Oct1.csv';
 %filename = 'Oct/Oct9.csv';
-filename = 'test/trendTest.csv';
+filename = 'Dec/Dec01.csv';
+
 
 M = csvread(filename);
 

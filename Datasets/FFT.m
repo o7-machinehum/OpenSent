@@ -6,7 +6,7 @@
 %-------------------------------------------------------------
 pkg load signal;
 
-clc; clear;
+clc; clear; close all;
 
 FontS = 20;
 
@@ -20,8 +20,8 @@ FontS = 20;
 %filename = 'Sept/Sept17_2017.csv';
 
 %filename = 'Oct/Sept29-Oct1.csv';
-%filename = 'Oct/Oct9.csv';
-filename = 'test/trendTest.csv';
+filename = 'Oct/Oct9.csv';
+%filename = 'Dec/Dec01.csv';
 
 M = csvread(filename);
 
@@ -102,22 +102,30 @@ legend('Cost', 'Sentiment')
 
 %
 %------------------------------------------------------------
-Fs = 0.5;                      % samples per second
+Fs = 1/30;                      % samples per second
 dt = 1/Fs;                     % seconds per sample
-StopTime = length(filteredCost) * 2;                  % seconds
+StopTime = length(filteredCost) * 30;                  % seconds
 t = (0:dt:StopTime-dt)';
 N = size(t,1);
 
 %% Fourier Transform:
-X = fftshift(fft(filteredCost));
-Rem = find(abs(X)/N > 10);
+X = fftshift(fft(Cost));
 
 %% Frequency specifications:
 dF = Fs/N;                      % hertz
-f = -Fs/2:dF:Fs/2-dF;           % hertz
+f = -Fs/2 : dF : Fs/2-dF;           % hertz
 
+Plow = 1500;
+Phigh = 100000; 
+
+Rem = find(f > 1/Plow);
 X(Rem) = [];
 f(Rem) = [];
+
+Rem = find(f < 1/Phigh);
+X(Rem) = [];
+f(Rem) = [];
+
 
 %Filtering
 %-------------------------------------------------------------
@@ -125,10 +133,10 @@ windowSize = 50;
 bb = (1/windowSize)*ones(1,windowSize);
 aa = 1;
 
-X2 = filter(X, bb, aa);
+%X2 = filter(X, bb, aa);
 
 %% Plot the spectrum:
 figure;
-plot(f,abs(X2)/N);
+plot(f,abs(X)/N);
 xlabel('Frequency (in hertz)');
 title('Magnitude Response');

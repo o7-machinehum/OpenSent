@@ -54,6 +54,12 @@ MinShiftel = MinShifthr*60*2;
 %filename = 'Nov/Nov12.csv';
 filename = 'Nov/Nov13.csv';
 
+filename = 'Dec/Dec01.csv';
+filename = 'Dec/Dec04.csv';
+filename = 'Dec/Dec05.csv';
+filename = 'Dec/Dec06.csv';
+filename = 'Dec/Dec07.csv';
+
 M = csvread(filename);
 
 %Defining placements

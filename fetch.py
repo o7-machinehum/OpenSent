@@ -5,11 +5,19 @@ from coinmarketcap import Market
 import time
 import datetime
 import pandas as pd
+import pdb
+
+numberTickers = 10
 
 def fetchPrice(ticker):
-	data = pd.read_csv("data/tickers.csv", names = ["Date", "Time", "Name", "Ticker", "Volume", "Price"])
+	coinmarketcap = Market()
+	coin = coinmarketcap.ticker(limit=numberTickers, convert='USD')
+	
+	#pdb.set_trace();
 
-	for x in range(0, len(data)):
-		if data.Ticker[x] == ticker:
-			return("%s" % (data.Price[x]))
-			#return("%s,%s,%s" % (data.Date[x], data.Time[x], data.Price[x]))
+	t = datetime.datetime.now()
+	ct = t.strftime('%m/%d/%Y,%H/%M/%S')
+	
+	for x in range(0, len(coin)):
+		if coin[x]['symbol'] == ticker:
+			return("%s" % (coin[x]['price_usd']))

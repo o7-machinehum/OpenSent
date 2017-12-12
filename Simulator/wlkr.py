@@ -19,8 +19,8 @@ def runningMeanFast(x, N):
 
 #Trading methods
 #--------------------------------------------------------------------
-#Method = 'SimpleSam'
-Method = 'TycoonJoe'
+Method = 'SimpleSam'
+#Method = 'TycoonJoe'
 #Method = 'SmartSally'
 
 #file = "../Datasets/Oct"
@@ -29,10 +29,10 @@ file = "../Datasets/Nov"
 
 DebugBreaks = True
 Debug = True
-Plot = False 
+Plot = False  
 
 BTC = 0 #Index value
-dataSize = 25
+dataSize = 10
 
 sim = Market(file, 1000)
 hrToSamples = 2*60
@@ -98,9 +98,9 @@ for k in range(0,dataSize):
 	SenOP = dSen[tau-tauL:tau]
 	timeOP = time[tau-tauL:tau]
 
-#	if Plot:
-		#plt.plot(timeOP, SenOP)
-		#plt.show()
+	#if Plot:
+	#	plt.plot(timeOP, SenOP)
+	#	plt.show()
 
 	if Debug:
 		#print('Operational Sentiment', SenOP)
@@ -108,15 +108,23 @@ for k in range(0,dataSize):
 
 #4.5 Plotting for Debug
 	if Plot:
-		plt.plot(nValue);
-		plt.plot(nSen);
+		#pdb.set_trace()
+		xVal = np.arange(0,len(nValue), 1)
+		plt.plot(xVal, nValue);
+		plt.plot(xVal + tauL, nSen);
 		plt.show()
 
 #5. Find the buy and sell triggers
-#TODO: Put actual value of sentament inside the sell/buy Triggers
-#			 Because right now it's first come first serve, the bot should
-#      be buying/selling on the largest sentiment!
 #--------------------------------------------------------------------
+	#ddSen = np.diff(dSen);
+	#TODO: Fix all this
+	#zero_crossings = np.where(np.diff(np.sign(dSen)))[0] #Find the zero crossings
+	#HighdSent = dSen[zero_crossings] , zero_crossings #Values with high sentiment change
+	#Buys = sorted(HighdSent[0])[-5:len(sorted(HighdSent[0]))] 
+	#Sells = sorted(HighdSent[0])[0:5]
+
+	#pdb.set_trace()
+
 	BuyTrigger = np.array(1)
 	SellTrigger = np.array(1)
 	
@@ -148,7 +156,6 @@ for k in range(0,dataSize):
 
 #6. Lets start to trade
 #--------------------------------------------------------------------
-
 #Method one - Simple Sam. Buy on buy triggers and sell on sell triggers
 #--------------------------------------------------------------------
 	if Method == 'SimpleSam':
@@ -157,11 +164,11 @@ for k in range(0,dataSize):
 		for i in range(0, tau):
 			if i in BuyTrigger:
 				if NextBuy == True:
-					sim.buy_CC(BTC, 10);
+					sim.buy_CC(BTC, 1);
 					NextBuy = False
 			if i in SellTrigger:	
 				if NextBuy == False:
-					sim.sell_CC(BTC, (10 / sim.get_CC_value(BTC)))	
+					sim.sell_CC(BTC, (1 / sim.get_CC_value(BTC)))	
 					NextBuy = True
 
 			M[i,0] = sim.get_CC_value(BTC)
@@ -231,6 +238,7 @@ for k in range(0,dataSize):
 
 			M[i,0] = sim.get_CC_value(BTC)
 			M[i,1] = sim.get_sentiment(BTC)
+			time[i] = sim.get_time()
 			sim.inc_time(30)
 
 	#pdb.set_trace()
