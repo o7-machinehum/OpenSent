@@ -61,11 +61,11 @@ while(True):
 		Time[i] = RT.get_time()
 		
 		if Time[i] == Time[i-1]:
-			time.sleep(15)
+			time.sleep(45)
 			waitForGoodData()
 			Time[i] = RT.get_time()
 			if Time[i] == Time[i-1]:
-				Log.write('Bad data timeout, Servercrash or eq.')
+				Log.Write('Bad data timeout, Servercrash or eq.')
 				#push.dump('Sentiment script not running' ,'ERROR:')
 
 		waitForGoodData()
@@ -112,8 +112,8 @@ while(True):
 #5. Find lag
 #--------------------------------------------------------------------
 	tauL = meanResult.argmin() #tauL = Lag time
-	SenOP = dSen[tau-tauL:tau]
-	timeOP = Time[tau-tauL:tau]
+	SenOP = dSen[dSen.size-tauL:dSen.size]
+	timeOP = Time[dSen.size-tauL:dSen.size]
 
 #6. Find the buy and sell triggers
 #--------------------------------------------------------------------
