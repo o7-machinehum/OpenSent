@@ -37,7 +37,7 @@ MinShiftel = MinShifthr*60*2;
 %filename = 'Oct/Oct4.csv';
 %filename = 'Oct/Oct5.csv';
 %filename = 'Oct/Oct6.csv';
-%filename = 'Oct/Oct7.csv';
+filename = 'Oct/Oct7.csv';
 %filename = 'Oct/Oct9.csv';
 %filename = 'Oct/Oct10.csv';
 %filename = 'Oct/Oct11.csv';
@@ -52,13 +52,13 @@ MinShiftel = MinShifthr*60*2;
 %filename = 'Nov/Nov10.csv';
 %filename = 'Nov/Nov11.csv';
 %filename = 'Nov/Nov12.csv';
-filename = 'Nov/Nov13.csv';
+%filename = 'Nov/Nov13.csv';
 
-filename = 'Dec/Dec01.csv';
-filename = 'Dec/Dec04.csv';
-filename = 'Dec/Dec05.csv';
-filename = 'Dec/Dec06.csv';
-filename = 'Dec/Dec07.csv';
+%filename = 'Dec/Dec01.csv';
+%filename = 'Dec/Dec04.csv';
+%filename = 'Dec/Dec05.csv';
+%filename = 'Dec/Dec06.csv';
+%filename = 'Dec/Dec07.csv';
 
 M = csvread(filename);
 
@@ -130,7 +130,8 @@ for i = 1:len
 end
 
 figure(1)
-plot(meanResult);
+t = 0:(length(meanResult)-1);
+plot(meanResult, t.*0.008333333);
 grid on
 
 title('Mean result time shifted correlation of Cost(Normalised) & Sentiment(Normalised)', 'FontSize', FontS);
@@ -152,11 +153,12 @@ for i = 1:lenDer
 end
 
 figure(2)
-plot(meanResultdiff);
+t = 0:(length(meanResult)-1);
+plot(t*0.008333333, meanResultdiff);
 grid on
-title('Mean result time shifted correlation of dCost/dt(norm) and dSen/dt(norm)', 'FontSize', FontS);
-xlabel('Time shift', 'FontSize', FontS);
-ylabel('Mean value (Lower is better)', 'FontSize', FontS);
+title('Correlation Vector - k', 'FontSize', FontS);
+xlabel('Time shift (hr)', 'FontSize', FontS);
+ylabel('Mean', 'FontSize', FontS);
 
 %break; %Break here - look at both plots then decide what lag to use
 
@@ -181,8 +183,17 @@ tit = strcat(tit, filename);
 x2 = x2 + lag;
 
 figure(1)
+ax2 = plotyy(x.*0.008333333, filteredCost, x2.*0.008333333, filteredSen );
+legend('Cost', 'Sentiment (timeshifted)');
+title(tit, 'FontSize', FontS);
+xlabel('Time (hr)', 'FontSize', FontS);
+ylabel(ax2(1), 'Cost (USD)', 'FontSize', FontS);
+ylabel(ax2(2), 'Crypto Sentiment', 'FontSize', FontS);
+break
+
+figure(1)
 subplot(2,1,1)
-ax2 = plotyy(x, filteredCost - mean(filteredCost), x2, filteredSen - mean(filteredSen));
+ax2 = plotyy(x, Cost, x2, filteredSen);
 grid on
 legend('Cost', 'Sentiment (timeshifted)');
 title(tit, 'FontSize', FontS);
@@ -193,7 +204,6 @@ hold on
 
 subplot(2,1,2)
 %plotyy(x, diff(filteredCost), x2, diff(filteredSen));
-%break
 
 %Taking derive remove element
 x(end) = [];
@@ -201,7 +211,7 @@ x2(end) = [];
 
 tit = strcat('diff',tit);
 %figure(2)
-ax2 = plotyy(x, diff(filteredCost), x2, diff(filteredSen));
+ax2 = plotyy(x/30, diff(filteredCost), x2/30, diff(filteredSen));
 grid on
 legend('dCost/dt', 'dSentiment/dt (timeshifted)');
 title(tit, 'FontSize', FontS);
