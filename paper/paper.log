@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.20)  20 DEC 2017 18:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.20)  21 DEC 2017 18:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -120,14 +120,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen117
 \Gin@req@width=\dimen118
 )
-(./paper.aux
-
-LaTeX Warning: Label `fig:FilteredSent' multiply defined.
-
-
-LaTeX Warning: Label `fig:FilteredSent' multiply defined.
-
-)
+(./paper.aux)
 \openout1 = `paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -298,11 +291,26 @@ pt x 433.62pt>
 File: ../Datasets/Plots/Oct7_K.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Oct7_K.pdf>
-Package pdftex.def Info: ../Datasets/Plots/Oct7_K.pdf used on input line 79.
+Package pdftex.def Info: ../Datasets/Plots/Oct7_K.pdf used on input line 77.
 (pdftex.def)             Requested size: 258.0pt x 193.49953pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 79--80
+Overfull \hbox (6.0pt too wide) in paragraph at lines 77--78
  [][] 
+ []
+
+
+Underfull \hbox (badness 4899) in paragraph at lines 82--86
+\OT1/ppl/m/n/12 sim-ply be-cause the sen-ti-ment val-ues are
+ []
+
+
+Underfull \hbox (badness 6001) in paragraph at lines 82--86
+\OT1/ppl/m/n/12 ef-fec-tively a float-ing value - where the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--86
+
  []
 
 <../Datasets/Plots/Oct7_CostSen.pdf, id=22, 578.16pt x 433.62pt>
@@ -310,43 +318,36 @@ File: ../Datasets/Plots/Oct7_CostSen.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Oct7_CostSen.pdf>
 Package pdftex.def Info: ../Datasets/Plots/Oct7_CostSen.pdf used on input line 
-86.
+94.
 (pdftex.def)             Requested size: 258.0pt x 193.49953pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 86--87
+Overfull \hbox (6.0pt too wide) in paragraph at lines 94--95
  [][] 
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 [2 <../Datasets/Plots/Oct9_Sen_Fil.pdf> <../Datasets/Plots/Oct7_K.pdf> <../Data
-sets/Plots/Oct7_CostSen.pdf>] (./paper.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+sets/Plots/Oct7_CostSen.pdf>] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 2295 strings out of 493029
- 36660 string characters out of 6136233
- 97460 words of memory out of 5000000
- 5809 multiletter control sequences out of 15000+600000
+ 2297 strings out of 493029
+ 36682 string characters out of 6136233
+ 97437 words of memory out of 5000000
+ 5811 multiletter control sequences out of 15000+600000
  42141 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,6n,23p,247b,268s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/urw/zapfding/uzdr.pfb>
-Output written on paper.pdf (2 pages, 193900 bytes).
+{/usr/share/texlive/texmf-dist/fon
+ts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/up
+lri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on paper.pdf (2 pages, 197532 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  55 compressed objects within 1 object stream

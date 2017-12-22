@@ -69,34 +69,40 @@ value.
 The timewise correlation was done by what I call the time correlation vector $k$ which is defined as equation \ref{eq:K}
 
 \begin{equation}\label{eq:K}
-k_j = \sum\limits_{i=1}^n x_i - y_{i+j} \textrm{, where j runs from 0 to N}
+k_j = \sum\limits_{i=1}^n x_i - y_{i+j} \textrm{, where j runs from 0 to n}
 \end{equation}
-
-$k$ is a minimizing function where the lowest magnitude indicates the highest level of correlation.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{../Datasets/Plots/Oct7_K}
-	\caption{Filtered Sentiment, October 9th 2017}
-	\label{fig:FilteredSent}
+	\caption{Time Correlation vector $k$,October 7th 2017}
+	\label{fig:K}
 \end{figure}
+
+Where $x = \frac{dCost}{dt}$ $y = \frac{dSent}{dt}$, the reasoning for using derivatives for the correlation is simply because
+the sentiment values are effectively a floating value - where the magnitude is not believed by myself to have any direct 
+relationship to the magnitude of cost. However, my findings have lead me to believe that a changing value of sentiment
+will induce a changing cost.\\
+
+$k$ is a minimizing function where the lowest magnitude indicates the highest level of correlation.
+As seen in Figure \ref{fig:K}, $k$ has a global minima around 5.2hrs, which I define as $\tau_L = 5.2hrs$ 
+or the effective 'Time lag' between high values of changing sentiment and high values of changing cost. Figure 
+\ref{fig:SentShift} shows the sentiment shifted forward in the by $\tau_L$.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{../Datasets/Plots/Oct7_CostSen}
-	\caption{Filtered Sentiment, October 9th 2017}
-	\label{fig:FilteredSent}
+	\caption{Time Shifted Sentiment, October 9th 2017}
+	\label{fig:SentShift}
 \end{figure}
 
-
+It can be observed that rates of high change and local minima and maxima are matched between the two datasets.
 
 \subsection{Realtime Implementation}
-Write things here.
-
+Write things here... Maybe?
 
 \section{Conclusion}
 The conclusion goes here.
-
 
 \begin{thebibliography}{1}
 
