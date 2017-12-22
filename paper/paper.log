@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.20)  21 DEC 2017 18:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.20)  22 DEC 2017 13:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -196,64 +196,71 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 21.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 18.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 21.
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 21.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 18.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14> on input line 21.
+(Font)              <14> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9.79996> on input line 21.
+(Font)              <9.79996> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 21.
-LaTeX Font Info:    Try loading font information for U+pzd on input line 21.
+(Font)              <7> on input line 18.
+LaTeX Font Info:    Try loading font information for U+pzd on input line 18.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/upzd.fd
 File: upzd.fd 2001/06/04 font definitions for U/pzd.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 24.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 21.
 LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <14> not available
-(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 24.
+(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 21.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 29.
+(Font)              <12> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 29.
+(Font)              <8> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 29.
+(Font)              <6> on input line 26.
 
-Underfull \hbox (badness 1668) in paragraph at lines 34--37
+Underfull \hbox (badness 1668) in paragraph at lines 31--34
 []\OT1/ppl/m/n/12 In most cases, point one and three are
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--37
+Underfull \hbox (badness 10000) in paragraph at lines 31--34
 
  []
 
 
-Underfull \hbox (badness 3039) in paragraph at lines 38--40
+Underfull \hbox (badness 3039) in paragraph at lines 35--37
 []\OT1/ppl/m/n/12 Of course there are still news ar-ti-facts
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--40
+Underfull \hbox (badness 10000) in paragraph at lines 35--37
 
  []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 43.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 41.
 
-Underfull \hbox (badness 3271) in paragraph at lines 44--47
-\OT1/ppl/m/n/12 As men-tioned above the main source of
+Underfull \hbox (badness 4279) in paragraph at lines 42--46
+\OT1/ppl/m/n/12 The main source of sen-ti-ment data was
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--47
+Underfull \hbox (badness 3000) in paragraph at lines 42--46
+\OT1/ppl/m/n/12 was any-where from $\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 :\OT1/cmr
+/m/n/12 2\OML/cmm/m/it/12 k[]$ \OT1/ppl/m/n/12 to $\OT1/cmr/m/n/12 24\OML/cmm/m
+/it/12 k[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--46
 
  []
 
@@ -273,84 +280,138 @@ File: ../Datasets/Plots/Oct9_Sen_Fil.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Oct9_Sen_Fil.pdf>
 Package pdftex.def Info: ../Datasets/Plots/Oct9_Sen_Fil.pdf used on input line 
-63.
+62.
 (pdftex.def)             Requested size: 258.0pt x 193.49953pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 63--64
+Overfull \hbox (6.0pt too wide) in paragraph at lines 62--63
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
- <../Datasets/Plots/Oct9_Sen.pdf>] <../Datasets/Plots/Oct7_K.pdf, id=21, 578.16
-pt x 433.62pt>
+ <../Datasets/Plots/Oct9_Sen.pdf>]
+<../Datasets/Plots/Oct7_K.pdf, id=21, 578.16pt x 433.62pt>
 File: ../Datasets/Plots/Oct7_K.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Oct7_K.pdf>
-Package pdftex.def Info: ../Datasets/Plots/Oct7_K.pdf used on input line 77.
+Package pdftex.def Info: ../Datasets/Plots/Oct7_K.pdf used on input line 76.
 (pdftex.def)             Requested size: 258.0pt x 193.49953pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 77--78
+Overfull \hbox (6.0pt too wide) in paragraph at lines 76--77
  [][] 
  []
 
 
-Underfull \hbox (badness 4899) in paragraph at lines 82--86
+Underfull \hbox (badness 4899) in paragraph at lines 81--85
 \OT1/ppl/m/n/12 sim-ply be-cause the sen-ti-ment val-ues are
  []
 
 
-Underfull \hbox (badness 6001) in paragraph at lines 82--86
+Underfull \hbox (badness 6001) in paragraph at lines 81--85
 \OT1/ppl/m/n/12 ef-fec-tively a float-ing value - where the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--86
+Underfull \hbox (badness 10000) in paragraph at lines 81--85
 
  []
 
-<../Datasets/Plots/Oct7_CostSen.pdf, id=22, 578.16pt x 433.62pt>
+
+Underfull \hbox (badness 5533) in paragraph at lines 86--89
+\OT1/ppl/m/n/12 mag-ni-tude in-di-cates the high-est level of
+ []
+
+
+Underfull \hbox (badness 2409) in paragraph at lines 86--89
+\OT1/ppl/m/n/12 min-ima around 5.2hrs, which I de-fine as
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 86--89
+
+ []
+
+<../Datasets/Plots/VectorSumk.pdf, id=22, 578.16pt x 433.62pt>
+File: ../Datasets/Plots/VectorSumk.pdf Graphic file (type pdf)
+
+<use ../Datasets/Plots/VectorSumk.pdf>
+Package pdftex.def Info: ../Datasets/Plots/VectorSumk.pdf used on input line 95
+.
+(pdftex.def)             Requested size: 258.0pt x 193.49953pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 95--96
+ [][] 
+ []
+
+<../Datasets/Plots/Oct7_CostSen.pdf, id=23, 578.16pt x 433.62pt>
 File: ../Datasets/Plots/Oct7_CostSen.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Oct7_CostSen.pdf>
 Package pdftex.def Info: ../Datasets/Plots/Oct7_CostSen.pdf used on input line 
-94.
+105.
 (pdftex.def)             Requested size: 258.0pt x 193.49953pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 94--95
+Overfull \hbox (6.0pt too wide) in paragraph at lines 105--106
  [][] 
  []
 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <12> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 110.
+<../Datasets/Plots/TweetVolume.pdf, id=24, 578.16pt x 433.62pt>
+File: ../Datasets/Plots/TweetVolume.pdf Graphic file (type pdf)
+
+<use ../Datasets/Plots/TweetVolume.pdf>
+Package pdftex.def Info: ../Datasets/Plots/TweetVolume.pdf used on input line 1
+16.
+(pdftex.def)             Requested size: 258.0pt x 193.49953pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 116--117
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 [2 <../Datasets/Plots/Oct9_Sen_Fil.pdf> <../Datasets/Plots/Oct7_K.pdf> <../Data
-sets/Plots/Oct7_CostSen.pdf>] (./paper.aux) ) 
+sets/Plots/VectorSumk.pdf>] [3
+
+ <../Datasets/Plots/Oct7_CostSen.pdf> <../Datasets/Plots/TweetVolume.pdf>] (./p
+aper.aux) ) 
 Here is how much of TeX's memory you used:
- 2297 strings out of 493029
- 36682 string characters out of 6136233
- 97437 words of memory out of 5000000
- 5811 multiletter control sequences out of 15000+600000
- 42141 words of font info for 89 fonts, out of 8000000 for 9000
+ 2313 strings out of 493029
+ 37072 string characters out of 6136233
+ 97453 words of memory out of 5000000
+ 5823 multiletter control sequences out of 15000+600000
+ 44027 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,6n,23p,247b,268s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fon
-ts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
-/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/up
-lri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on paper.pdf (2 pages, 197532 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
+uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texlive/texmf-dist/font
+s/type1/urw/zapfding/uzdr.pfb>
+Output written on paper.pdf (3 pages, 473303 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
+ 91 PDF objects out of 1000 (max. 8388607)
+ 66 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -14,16 +14,13 @@ for a given crypocurrency over a given unit of time in the interest in finding a
 \end{abstract}
 }
 
-%Twitter was the main source of sentiment, and as BTC has the highest volume of tweets
-%it is the focus of this paper.
-
 % make the title area
 \maketitle
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
 \IEEEPARstart{S}{entiment} analysis techniques have been used for stock market predictions in the past  with 
-mixed success \cite{BI1}. I reason that for a technique like this to work there are three major requirements.
+mixed success \cite{BI1}. We are of the opinion that for a technique like this to work there are three major requirements.
 
 \begin{itemize}
 \item High volume of sentiment source
@@ -33,20 +30,23 @@ mixed success \cite{BI1}. I reason that for a technique like this to work there 
 
 In most cases, point one and three are mutually exclusive, meaning if there is a high volume of people talking about a
 stock publicly $\frac{100k+}{Day}$, the company typically will typically be publishing earning reports, posting news, etc... 
-Where are important for investors, but cannot be accurately modeled as they are considered artifacts.\\
+Which are important for investors, but cannot be accurately modeled as they are considered artifacts.\\
 
 Of course there are still news artifacts regarding Cryptocurrencies, but they are less common and typically 
 have less of an impact because they are mostly subjective, unlike an earning report or other financial documents.\\
 
-In this paper I'm going to outline the numerical techniques I used in to do bla bla bla...
+The aim of this paper is to attempt to validate what has been listed above, and use the data to make further informed 
+buys and sells.
 
 \subsection{Gathering Sentiment Data}
-As mentioned above the main source of sentiment data was from twitter. A Python module \textit{tweepy} was used to gather
+The main source of sentiment data was from twitter. A Python module \textit{tweepy} was used to gather
 tweets and then bin them into cryptocurrencies of interest, the volume was anywhere from $1.2k \frac{tweets}{hr}$
-to  $24k \frac{tweets}{hr}$ for each currency.\\
+to $24k \frac{tweets}{hr}$ depending on the currency of interest. For this paper we were mostly interest in BTC, as the
+tweet volume is the highest.\\
 
-From that point is was the possible to use Python \textit{NLTK} (Natural Language Toolkit) to rate each tweet and make a net
-sum per unit time. Figure \ref{fig:RawSent} shows the output of what I have described above.
+Once the data is gathered it's put into a time series with a period of 30 seconds - from that point Python \textit{NLTK} 
+(Natural Language Toolkit) is used to perform sentiment analysis to rate each tweet and make a net sum per unit time. 
+Figure \ref{fig:RawSent} shows the output of what I have described above.
 
 \begin{figure}[hp]
 	\centering
@@ -55,8 +55,7 @@ sum per unit time. Figure \ref{fig:RawSent} shows the output of what I have desc
 	\label{fig:RawSent}
 \end{figure}
 
-After a little filtering Figure \ref{fig:FilteredSent}. From here it was possible to compare to time series plots of the
-value.
+After a little filtering Figure \ref{fig:FilteredSent} - it's possible to compare to time series plots of the value.
 
 \begin{figure}[h]
 	\centering
@@ -69,13 +68,13 @@ value.
 The timewise correlation was done by what I call the time correlation vector $k$ which is defined as equation \ref{eq:K}
 
 \begin{equation}\label{eq:K}
-k_j = \sum\limits_{i=1}^n x_i - y_{i+j} \textrm{, where j runs from 0 to n}
+k_j = \frac{\sum\limits_{i=0}^n x_i - y_{i+j}}{n-j} \textrm{, where j runs from 0 to n}
 \end{equation}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{../Datasets/Plots/Oct7_K}
-	\caption{Time Correlation vector $k$,October 7th 2017}
+	\caption{Time Correlation vector $k$, October 7th 2017}
 	\label{fig:K}
 \end{figure}
 
@@ -86,8 +85,20 @@ will induce a changing cost.\\
 
 $k$ is a minimizing function where the lowest magnitude indicates the highest level of correlation.
 As seen in Figure \ref{fig:K}, $k$ has a global minima around 5.2hrs, which I define as $\tau_L = 5.2hrs$ 
-or the effective 'Time lag' between high values of changing sentiment and high values of changing cost. Figure 
-\ref{fig:SentShift} shows the sentiment shifted forward in the by $\tau_L$.
+or the effective 'Time lag' between high values of changing sentiment and high values of changing cost.\\
+
+Averaging this vector over a given unit of time as shown in Figure \ref{fig:Ksum} shows repeatable $\tau_L$ values. 
+In addition there are some interesting patterns appearing as local minama at $\sim1.8hrs$ and $\sim3.2hrs$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{../Datasets/Plots/VectorSumk}
+	\caption{Mean Time Correlation vector $k$, Nov2 - Nov17, 2017}
+	\label{fig:Ksum}
+\end{figure}
+
+Figure \ref{fig:SentShift} shows the sentiment shifted forward in the by $\tau_L$. It can be observed that 
+rates of high change and local minima and maxima are matched between the two datasets.
 
 \begin{figure}[h]
 	\centering
@@ -96,7 +107,16 @@ or the effective 'Time lag' between high values of changing sentiment and high v
 	\label{fig:SentShift}
 \end{figure}
 
-It can be observed that rates of high change and local minima and maxima are matched between the two datasets.
+\subsubsection{Time Zone Inferance}
+There are also highly observable daily oscillations in tweet volume as seen in Figure \ref{fig:OSC}. 
+These can be used to infer time zones of maximum influence.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{../Datasets/Plots/TweetVolume}
+	\caption{Tweet volume, Nov2 - Nov17, 2017}
+	\label{fig:OSC}
+\end{figure}
 
 \subsection{Realtime Implementation}
 Write things here... Maybe?

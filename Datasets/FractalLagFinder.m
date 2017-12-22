@@ -22,39 +22,23 @@ D = 16; %How many chunks do you want to break up the data into
 
 %File location
 %-------------------------------------------------------------
-filename1 = 'Sept/Sept17-18.csv';
-filename2 = 'Sept/Sept17_2017.csv';
-filename3 = 'Sept/Sept19-21.csv';
-filename4 = 'Sept/Sept19-26.csv';
-filename5 = 'Sept/Sept20_2017.csv';
-filename5 = 'Sept/Sept17_2017.csv';
+M =    csvread('Nov/Nov02.csv');
+M = [M;csvread('Nov/Nov03.csv')];
+M = [M;csvread('Nov/Nov04.csv')];
+M = [M;csvread('Nov/Nov05.csv')];
+M = [M;csvread('Nov/Nov06.csv')];
+M = [M;csvread('Nov/Nov07.csv')];
+M = [M;csvread('Nov/Nov08.csv')];
+M = [M;csvread('Nov/Nov09.csv')];
+M = [M;csvread('Nov/Nov10.csv')];
+M = [M;csvread('Nov/Nov11.csv')];
+M = [M;csvread('Nov/Nov12.csv')];
+M = [M;csvread('Nov/Nov13.csv')];
+M = [M;csvread('Nov/Nov14.csv')];
+M = [M;csvread('Nov/Nov15.csv')];
+M = [M;csvread('Nov/Nov16.csv')];
+M = [M;csvread('Nov/Nov17.csv')];
 
-filename6 = 'Oct/Sept29-Oct1.csv';
-filename7 = 'Oct/Oct2.csv';
-filename8 = 'Oct/Oct3.csv';
-filename9 = 'Oct/Oct4.csv';
-filename10 = 'Oct/Oct5.csv';
-filename11 = 'Oct/Oct6.csv';
-filename12 = 'Oct/Oct7.csv';
-filename13 = 'Oct/Oct8.csv';
-filename14 = 'Oct/Oct9.csv';
-filename15 = 'Oct/Oct10.csv';
-filename16 = 'Oct/Oct11.csv';
-filename17 = 'Oct/Oct12.csv';
-filename18 = 'Oct/Oct13.csv';
-
-M = csvread(filename7);
-M = [M;csvread(filename8)];
-M = [M;csvread(filename9)];
-M = [M;csvread(filename10)];
-M = [M;csvread(filename11)];
-M = [M;csvread(filename12)];
-M = [M;csvread(filename13)];
-M = [M;csvread(filename14)];
-M = [M;csvread(filename15)];
-M = [M;csvread(filename16)];
-M = [M;csvread(filename17)];
-M = [M;csvread(filename18)];
 
 %Defining placements
 %-------------------------------------------------------------
