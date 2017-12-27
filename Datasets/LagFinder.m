@@ -16,7 +16,7 @@ ShiftMethod = 'diff'; %Differential shift method
 %ShiftMethod = 'man'; %Manual shift method
 grid on
 
-MaxShifthr = 7;
+MaxShifthr = 20;
 MaxShiftel = MaxShifthr*60*2;
 
 MinShifthr = 1; %Lets ignore a possible time lag less than 1hr
@@ -37,7 +37,7 @@ MinShiftel = MinShifthr*60*2;
 %filename = 'Oct/Oct4.csv';
 %filename = 'Oct/Oct5.csv';
 %filename = 'Oct/Oct6.csv';
-filename = 'Oct/Oct7.csv';
+%filename = 'Oct/Oct7.csv';
 %filename = 'Oct/Oct9.csv';
 %filename = 'Oct/Oct10.csv';
 %filename = 'Oct/Oct11.csv';
@@ -58,9 +58,13 @@ filename = 'Oct/Oct7.csv';
 %filename = 'Dec/Dec04.csv';
 %filename = 'Dec/Dec05.csv';
 %filename = 'Dec/Dec06.csv';
-%filename = 'Dec/Dec07.csv';
+filename = 'Dec/Dec07.csv';
 
-M = csvread(filename);
+M =    csvread('Dec/Dec21.csv');
+M = [M;csvread('Dec/Dec22.csv')];
+M = [M;csvread('Dec/Dec23.csv')];
+%M = [M;csvread('Dec/Dec24.csv')];
+%M = [M;csvread('Dec/Dec25.csv')];
 
 %Defining placements
 %-------------------------------------------------------------
@@ -98,7 +102,7 @@ aa = 1;
 [b,a]=butter(3, 0.01);
 filteredSen = filter(b,a,Sen);
 filteredCost = filter(bb,aa,Cost);
-filteredVol = filter(b,a,Vol);
+filteredVol = filter(bb,aa,Vol);
 
 %For some reason the average filter fucks up the first little bit
 Cost(1:windowSize) = [];

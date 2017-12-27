@@ -68,3 +68,6 @@ Tue Dec 19 15:20:33 PST 2017 Exited with status 1
 Tue Dec 19 15:20:33 PST 2017 Restarting
 Tue Dec 19 18:43:08 PST 2017 Exited with status 1
 Tue Dec 19 18:43:08 PST 2017 Restarting
+Wed Dec 20 22:43:14 PST 2017 Starting
+Tue Dec 26 12:28:52 PST 2017 Exited with status 1
+Tue Dec 26 12:28:52 PST 2017 Restarting
