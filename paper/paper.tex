@@ -23,12 +23,12 @@ for a given crypocurrency over a given unit of time in the interest in finding a
 mixed success \cite{BI1}. We are of the opinion that for a technique like this to work there are three major requirements.
 
 \begin{enumerate}
-\item High volume of sentiment source
-\item Strong correlation to trader action and community opinion
-\item Low quantity of non-deterministic value changing artifacts news reports, earnings, company announcements, etc...
+\item High volume of sentiment source;
+\item Strong correlation to trader action and community opinion, and
+\item Low quantity of non-deterministic value changing artifacts: news reports, earnings, company announcements, etc.
 \end{enumerate}
 
-In most cases, point one and three are mutually exclusive, meaning if there is a high volume of people talking about a
+In most cases, points one and three are mutually exclusive, meaning if there is a high volume of people talking about a
 stock publicly $\frac{100k+}{Day}$, the company will typically be publishing earning reports, posting news, etc... 
 These are important for investors, but cannot be accurately modeled as they are considered random artifacts.\\
 
@@ -40,14 +40,14 @@ The aim of this paper is to attempt to validate what has been listed above, and 
 buys and sells.
 
 \subsection{Gathering Sentiment Data}
-The main source of sentiment data was from twitter. A Python module \textit{tweepy} \cite{Tweepy} was used to gather
-tweets and then bin them into cryptocurrencies of interest, the volume was anywhere from $1.2k \frac{tweets}{hr}$
+The main source of sentiment data was from twitter. The Python module \textit{tweepy} \cite{Tweepy} was used to gather
+tweets and bin them into cryptocurrencies of interest. The volume was anywhere from $1.2k \frac{tweets}{hr}$
 to $24k \frac{tweets}{hr}$ depending on the currency of interest. For this paper we were mostly interest in BTC, as the
-tweet volume is the highest, in the past five months, we have gathered over 21 billion tweets on Bitcoin alone.\\
+tweet volume is the highest; in the past five months, we have gathered over 21 billion tweets on Bitcoin alone.\\
 
-Once the data is gathered it's put into a time series dataset with a period of 30 seconds - from that point Python \textit{NLTK} 
-(Natural Language Toolkit) \cite{NLTK} is used to perform sentiment analysis to rate each tweet and make a net sum per unit time. 
-Figure \ref{fig:RawSent} shows the output of what I have described above.
+Once the data is gathered it is put into a time series dataset with a period of 30 seconds - from that point Python \textit{NLTK} 
+(Natural Language Toolkit) \cite{NLTK} is used to perform sentiment analysis to rate each tweet and make a net sum per unit time,
+as shown in Figure \ref{fig:RawSent}. 
 
 \begin{figure}[hp]
 	\centering
@@ -56,7 +56,7 @@ Figure \ref{fig:RawSent} shows the output of what I have described above.
 	\label{fig:RawSent}
 \end{figure}
 
-After a little filtering Figure \ref{fig:FilteredSent} - it's possible to compare the sentiment and values time series.
+The filtered signal is shown in Figure \ref{fig:FilteredSent} - it's possible to compare the sentiment and values time series.
 
 \begin{figure}[h]
 	\centering
@@ -66,14 +66,19 @@ After a little filtering Figure \ref{fig:FilteredSent} - it's possible to compar
 \end{figure}
 
 \subsection{Timewise Correlation}
-In the beginning, the plots were manually shifted forward in time until they 'looked right', later a numerical method was used
-for correlation.\\
-
-The timewise correlation was done by what we call the time correlation vector $k$ which is defined as equation \ref{eq:K}
+The timewise correlation was calculated using the correlation vector $k$,
 
 \begin{equation}\label{eq:K}
-k_j = \frac{\sum\limits_{i=0}^n x_i - y_{i+j}}{n-j} \textrm{, where j runs from 0 to n}
+k_j = \frac{\sum\limits_{i=0}^n \dot{x}_i - \dot{y}_{i+j}}{n-j},\quad j=0,\dots,n
 \end{equation}
+
+\noindent where $x$ denotes the cost of the currency and $y$ the sentiment.\\ 
+
+The reasoning for using derivatives 
+for the correlation is simply because the sentiment values are effectively a floating quantity -- 
+the magnitude of the sentiment is not believed to have any direct relationship with the magnitude of the cost.
+In other words we are looking for a correlation between the change in sentiment with the change in cost. 
+This is justified by the success of our analysis\\
 
 \begin{figure}[h]
 	\centering
@@ -82,18 +87,13 @@ k_j = \frac{\sum\limits_{i=0}^n x_i - y_{i+j}}{n-j} \textrm{, where j runs from 
 	\label{fig:K}
 \end{figure}
 
-Where $x = \frac{dCost}{dt}$ $y = \frac{dSent}{dt}$, the reasoning for using derivatives for the correlation is simply because
-the sentiment values are effectively a floating quantity - where the magnitude is not believed by us to have any direct 
-relationship to the magnitude of cost. However, our findings have lead us to believe that a changing value of sentiment correlates
-changing cost.\\
+We look for local minima in of $k$ as these points indicate the highest level of signal similarity.
+As seen in Figure \ref{fig:K}, $k$ has a global minima around 5.2hrs, which is defined as $\tau_L = 5.2hrs$ 
+or the effective time lag between high values of changing sentiment and high values of changing cost.\\
 
-$k$ is a minimizing function where the lowest magnitude indicates the highest level of correlation between sentiment and cost.
-As seen in Figure \ref{fig:K}, $k$ has a global minima around 5.2hrs, which I define as $\tau_L = 5.2hrs$ 
-or the effective 'Time lag' between high values of changing sentiment and high values of changing cost.\\
-
-It has been observed that $\tau_L$ has been repeatable over a given unit of time, Figure \ref{fig:Ksum} 
-shows the vector sum of many $k$ from November 2nd to November 17th (15 $k$ vectors). In addition there are some interesting 
-patterns appearing as local minama at $\sim1.8hrs$ and $\sim3.2hrs$.
+We observe that the calculation of $\tau_L$ has been repeatable over a given unit of time. Figure \ref{fig:Ksum} 
+shows the vector sum of 15 $k$ vectors from November 2nd to November 17th. In addition there are some interesting 
+patterns appearing as local minima at $\sim1.8hrs$ and $\sim3.2hrs$.
 
 \begin{figure}[h]
 	\centering
@@ -102,9 +102,9 @@ patterns appearing as local minama at $\sim1.8hrs$ and $\sim3.2hrs$.
 	\label{fig:Ksum}
 \end{figure}
 
-Figure \ref{fig:SentShift} shows the sentiment shifted forward in the by $\tau_L$. It can be observed that 
-rates of high change and local minima and maxima are matched between the two datasets. There are further similar plots 
-Figure: \ref{fig:Dec23} - \ref{fig:Dec4-8} 
+Figure \ref{fig:SentShift} shows the sentiment shifted forward in time by $\tau_L$. The 
+rates of high change and local minima and maxima are matched between the two datasets, see also
+figures \ref{fig:Dec23} to \ref{fig:Dec4-8}. 
 
 \begin{figure}[h]
 	\centering
@@ -114,58 +114,59 @@ Figure: \ref{fig:Dec23} - \ref{fig:Dec4-8}
 \end{figure}
 
 \subsection{Realtime Implementation}
-Moving into a real time implementation was simple enough, previously the data post processing was being done in Octave, for the 
+Moving into a real time implementation was simple enough; previously the data post processing was being done in Octave, for the 
 real time implementation Python was used. The application followed this structure,
 \begin{enumerate}
-	\item Fixed length of data was gathered, used 10hrs
-	\item Steps above were executed, filtered, $k$ found and $\tau_L$ found
-	\item Once $\tau_L$ was known, and you were at time $t = \tau$ you have $\tau - \tau_L$ worth of 'useful data' that you could
-	make predictions on
-	\item Buy and sell triggers were found (see below)
-	\item Push notifications are sent to a mobile device using pushover \cite{Pushover}
+	\item $\tau = 10hrs$ of data is gathered.
+	\item Data is filtered, $k$ and hence $\tau_L$ are calculated.
+	\item Buy and sell triggers are found, using the data from $\tau - \tau_L$, where $\tau$ is the current time.
+	\item Finally, Push notifications are sent to a mobile device using pushover \cite{Pushover}.
 \end{enumerate}
-The crux of the real time application is finding the trigger points (Item 4), these are 
-values or grouping of values that indicate that something is going to 
-happen in $\tau_L$ time. As seen in Figure \ref{fig:SentShift} high slope values of sentiment can be used 
-to infer changing cost values in time $\tau_L$. So high slope positive and negative slopes values were taken and
-labeled as buy and sell triggers respectively, this is one possibly method of finding the triggers, but further work
-should be done to understand if this is the best. 
+%rework
+The crux of the realtime application is finding the trigger points. 
+happen in $\tau_L$ time. 
+%rework
+Is is expected that current high values of $\dot{y}$ correlate to high values of $\dot{x}$ in time $\tau_L$.
+So high slope positive and negative values were taken and
+labeled as buy and sell triggers respectively. This is one possible method of finding the triggers, but further work
+should be done to understand if this is the best.
 
-This was the first crack at the real time app, it's currently running and sending out advice that is being used for HFT (high 
-frequency trading)
-\section{Future work}
+This realtime application is currently running and sending out advice for HFT (high frequency trading).
+\section{Future work} %Move this into conclusion
 \subsection{Optimisation problem}
-There are a lot of parameters in the real time application that are in need of optimisation. 
+The parameters in the real time application that are in need of optimisation. 
 \begin{itemize}
-	\item $\tau$ - the amount of data to collect in the real time app before starting the post operations
-	\item Number of buy/sell triggers, per $\tau$
-	\item Stronger understanding of the Time Zone Inference (See appendix)
-	\item Threshold for buy/sell triggers, what counts a 'high sentiment'
-	\item Filter cutoff
+	\item $\tau$ - the amount of data to collect in the real time app before starting the post operations.
+	\item Number of buy/sell triggers, per $\tau$.
+	\item Stronger understanding of the Time Zone Inference (See appendix).
+	\item Threshold for buy/sell triggers, what counts a 'high sentiment'.
+	\item Filter cutoff frequency.
 \end{itemize}
-Using all the archived data that we have been collecting over that past 5 months we could write an iterative application that
-tunes each parameter to reduce the error. This would be extremely computational expensive most likely require offloading to
-AWS or another similar service. 
+We could optimize each parameter using our existing dataset.
+This would be extremely computational expensive most likely require offloading to an HPC environment.
 
 \subsection{Machine Learning}
 It's possible that there are correlations in the dataset that are not distinguishable by humans. Treating the problem
-like a black box and using a deep neural net it might be possible to gain a deeper understanding of trends and stronger
-correlations. In addition - we believe this is also a strong candidate for a Bayesian inference problem.
+like a black box and using a deep neural net it might be possible to gain a deeper understanding of trends and better results. 
+In addition, we believe we could also use Bayesian inference techniques.
 
 \subsection{Public Accessibility}
-Conceivability all the work that has been done could be rolled into a pay to access platform that users can subscribe to help
-make further informed trading decisions.
+All the work that has been done could be rolled into a pay to access platform to which users can subscribe to make informed
+trading decisions.
 
-\section{Conclusion}
-A lot is happening in the crypto currency landscape right now, as newly opened exchanges have given people access to invest in
-the idea of a decentralised currency. This gives reason to believe that in addition to understanding 
-the tech, it's also interesting to understand what people are thinking about the tech. This is important because the majority 
+\section{Conclusion} %Roll future work into this. Just because the conclusion sucks balls
+The crypto currency landscape is rapidly changing, as newly opened exchanges have facilitated access in the investment of 
+decentralised currencies. 
+%Rework
+This gives reason to believe that in addition to understanding 
+the tech, it's also interesting to understand what people are thinking about the tech. 
+%Rework
+This is important because the majority 
 vote will determine the most widely adopted currency.\\
 
-This was partially demonstrated in the work done above, but there's much more work that can be done . If we
-are to better understand public perception methods other than just Twitter - we believe it's possible to see an ever better fit.
-Aggregating a larger dataset could be used to understand the limitations of currencies and how volume spikes effect their
-network. 
+This was partially demonstrated in the work done above, but there's much more work that can be done. Analysis of other platforms
+other than just Twitter we believe it's possible to see an even better results. Aggregating a larger dataset could be 
+used to understand the limitations of currencies and how volume spikes affect their network.
 
 \section{Appendix}
 \subsection{Time Zone Inferance}

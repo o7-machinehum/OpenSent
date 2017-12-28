@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.10.6)  27 DEC 2017 14:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.10.6)  27 DEC 2017 20:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -228,11 +228,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 32.
 
-Underfull \hbox (badness 1668) in paragraph at lines 31--34
-[]\OT1/ppl/m/n/12 In most cases, point one and three are
- []
-
-
 Underfull \hbox (badness 2269) in paragraph at lines 31--34
 \OT1/ppl/m/n/12 mu-tu-ally ex-clu-sive, mean-ing if there is a
  []
@@ -260,9 +255,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--38
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 42.
 
-Underfull \hbox (badness 2418) in paragraph at lines 43--47
-\OT1/ppl/m/n/12 twit-ter. A Python mod-ule \OT1/ppl/m/it/12 tweepy \OT1/ppl/m/n
-/12 [[]] was
+Underfull \hbox (badness 1735) in paragraph at lines 43--47
+\OT1/ppl/m/n/12 used to gather tweets and bin them into
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--47
+\OT1/ppl/m/n/12 cryp-tocur-ren-cies of in-ter-est. The vol-ume
  []
 
 
@@ -303,49 +302,41 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 63--64
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 69--71
-
- []
-
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
- <../Datasets/Plots/Oct9_Sen.pdf>] <../Datasets/Plots/Oct7_K.pdf, id=20, 578.16
-pt x 433.62pt>
+ <../Datasets/Plots/Oct9_Sen.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
+
+ []
+
+
+Underfull \hbox (badness 3792) in paragraph at lines 77--82
+\OT1/ppl/m/n/12 to have any di-rect re-la-tion-ship with the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--82
+
+ []
+
+<../Datasets/Plots/Oct7_K.pdf, id=20, 578.16pt x 433.62pt>
 File: ../Datasets/Plots/Oct7_K.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Oct7_K.pdf>
-Package pdftex.def Info: ../Datasets/Plots/Oct7_K.pdf used on input line 80.
+Package pdftex.def Info: ../Datasets/Plots/Oct7_K.pdf used on input line 85.
 (pdftex.def)             Requested size: 258.0pt x 193.49953pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 80--81
+Overfull \hbox (6.0pt too wide) in paragraph at lines 85--86
  [][] 
  []
 
 
-Underfull \hbox (badness 4899) in paragraph at lines 85--89
-\OT1/ppl/m/n/12 sim-ply be-cause the sen-ti-ment val-ues are
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 85--89
-\OT1/ppl/m/n/12 ef-fec-tively a float-ing quan-tity - where the
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--89
-
- []
-
-
-Underfull \hbox (badness 4266) in paragraph at lines 90--93
-[]$\OML/cmm/m/it/12 k$ \OT1/ppl/m/n/12 is a min-i-miz-ing func-tion where the
- []
-
-
-Underfull \hbox (badness 1394) in paragraph at lines 90--93
-\OT1/ppl/m/n/12 of cor-re-la-tion be-tween sen-ti-ment and cost.
+Underfull \hbox (badness 1776) in paragraph at lines 90--93
+\OT1/ppl/m/n/12 points in-di-cate the high-est level of sig-nal
  []
 
 
@@ -380,60 +371,67 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 111--112
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Underfull \vbox (badness 1796) has occurred while \output is active []
-
- [2 <../Datasets/Plots/Oct9_Sen_Fil.pdf> <../Datasets/Plots/Oct7_K.pdf> <../Dat
-asets/Plots/VectorSumk.pdf>]
-Underfull \hbox (badness 4595) in paragraph at lines 143--144
+[2 <../Datasets/Plots/Oct9_Sen_Fil.pdf> <../Datasets/Plots/Oct7_K.pdf> <../Data
+sets/Plots/VectorSumk.pdf>]
+Underfull \hbox (badness 4595) in paragraph at lines 142--143
 []\OT1/ppl/m/n/12 Threshold for buy/sell trig-gers, what
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--164
-\OT1/ppl/m/n/12 land-scape right now, as newly opened
+Underfull \hbox (badness 3417) in paragraph at lines 158--166
+\OT1/ppl/m/n/12 The crypto cur-rency land-scape is rapidly
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--164
+Underfull \hbox (badness 10000) in paragraph at lines 158--166
+\OT1/ppl/m/n/12 chang-ing, as newly opened ex-changes
+ []
+
+
+Underfull \hbox (badness 5302) in paragraph at lines 158--166
+\OT1/ppl/m/n/12 have fa-cil-i-tated ac-cess in the in-vest-ment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--166
 
  []
 
-[3 <../Datasets/Plots/Oct7_CostSen.pdf>]
-<../Datasets/Plots/TweetVolume.pdf, id=44, 578.16pt x 433.62pt>
+<../Datasets/Plots/TweetVolume.pdf, id=37, 578.16pt x 433.62pt>
 File: ../Datasets/Plots/TweetVolume.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/TweetVolume.pdf>
 Package pdftex.def Info: ../Datasets/Plots/TweetVolume.pdf used on input line 1
-76.
+77.
 (pdftex.def)             Requested size: 258.0pt x 193.49953pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 176--177
- [][] 
- []
-
-<../Datasets/Plots/Dec23.pdf, id=45, 578.16pt x 433.62pt>
-File: ../Datasets/Plots/Dec23.pdf Graphic file (type pdf)
-
-<use ../Datasets/Plots/Dec23.pdf>
-Package pdftex.def Info: ../Datasets/Plots/Dec23.pdf used on input line 185.
-(pdftex.def)             Requested size: 258.0pt x 193.49953pt.
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 185--186
+Overfull \hbox (6.0pt too wide) in paragraph at lines 177--178
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+<../Datasets/Plots/Dec23.pdf, id=38, 578.16pt x 433.62pt>
+File: ../Datasets/Plots/Dec23.pdf Graphic file (type pdf)
+
+<use ../Datasets/Plots/Dec23.pdf>
+Package pdftex.def Info: ../Datasets/Plots/Dec23.pdf used on input line 186.
+(pdftex.def)             Requested size: 258.0pt x 193.49953pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 186--187
+ [][] 
+ []
+
+[3 <../Datasets/Plots/Oct7_CostSen.pdf>]
 <../Datasets/Plots/Dec26.pdf, id=46, 578.16pt x 433.62pt>
 File: ../Datasets/Plots/Dec26.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Dec26.pdf>
-Package pdftex.def Info: ../Datasets/Plots/Dec26.pdf used on input line 192.
+Package pdftex.def Info: ../Datasets/Plots/Dec26.pdf used on input line 193.
 (pdftex.def)             Requested size: 258.0pt x 193.49953pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 192--193
+Overfull \hbox (6.0pt too wide) in paragraph at lines 193--194
  [][] 
  []
 
@@ -444,7 +442,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: ../Datasets/Plots/Dec21-23.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Dec21-23.pdf>
-Package pdftex.def Info: ../Datasets/Plots/Dec21-23.pdf used on input line 199.
+Package pdftex.def Info: ../Datasets/Plots/Dec21-23.pdf used on input line 200.
 
 (pdftex.def)             Requested size: 412.80157pt x 309.59926pt.
 
@@ -455,7 +453,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: ../Datasets/Plots/Dec4-8.pdf Graphic file (type pdf)
 
 <use ../Datasets/Plots/Dec4-8.pdf>
-Package pdftex.def Info: ../Datasets/Plots/Dec4-8.pdf used on input line 206.
+Package pdftex.def Info: ../Datasets/Plots/Dec4-8.pdf used on input line 207.
 (pdftex.def)             Requested size: 412.80157pt x 309.59926pt.
 
 
@@ -484,7 +482,7 @@ s/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1
 c/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on paper.pdf (5 pages, 838408 bytes).
+Output written on paper.pdf (5 pages, 837608 bytes).
 PDF statistics:
  109 PDF objects out of 1000 (max. 8388607)
  79 compressed objects within 1 object stream
