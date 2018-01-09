@@ -1,10 +1,10 @@
 from stocktalk import streaming
 
 # Credentials to access Twitter API 
-API_KEY = '8RLwQcpNhja2g2ASsJEp2p7z0'
-API_SECRET = 'lFEfuchQPLW8ZTstgQgsExbgQXDHTlM2T3hpgbcQlBccNNKlx2'
-ACCESS_TOKEN = '904535979918221312-9FQZHCBC94jYIKwvLuvVf802PU99OW3'
-ACCESS_TOKEN_SECRET = 'xZlcFiR0fKrSQ1I9N21WGalixndYyeorRK4ScyEu6IjOf'
+API_KEY = ''
+API_SECRET = ''
+ACCESS_TOKEN = ''
+ACCESS_TOKEN_SECRET = ''
 credentials = [API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET]
 
 # First element must be ticker/name, proceeding elements are extra queries
