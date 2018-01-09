@@ -4,6 +4,6 @@ correlation between price and sentiment. Credit to stocktalk for code in 'stockt
 <br/>
 
 [Paper V0.1 here](https://github.com/Machine-Hum/cryptos/blob/master/paper/paper.pdf)
-<br\><br\>
+<br/><br/>
 
 ![Plot](/Datasets/Plots/Dec4-8.png)
